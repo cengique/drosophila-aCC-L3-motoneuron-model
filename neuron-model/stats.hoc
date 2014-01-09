@@ -1,0 +1,89 @@
+
+//load_file("neuron-NL-CellBuilder-pas-electrode.ses")
+//load_file("neuron-CB-pas-electrode-embed.ses")
+
+double retArray[2]
+
+// Calc summed length and averaged diameter
+// $1: sectionlist name
+func sumLavgD() { local totL, totdiam, numsecs
+  numsecs = 0
+  totL = 0
+  totdiam = 0
+
+  forsec $o1 {
+    totL = totL + L
+    totdiam = totdiam + diam
+    numsecs = numsecs + 1
+  }
+
+  totdiam = totdiam / numsecs
+
+  print "Final length: ", totL
+  print "Final diameter: ", totdiam
+
+/*  retArray[0] = totL
+  retArray[1] = totdiam */
+
+  return totL
+}
+
+// Calc summed length and length-weighted average diameter
+// $1: sectionlist name
+proc sumLwavgD() { local totL, totdiam, numsecs
+  numsecs = 0
+  totL = 0
+  totdiam = 0
+
+  forsec $o1 {
+    totL = totL + L
+    totdiam = totdiam + diam*L
+    numsecs = numsecs + 1
+    my_g_pas = g_pas
+  }
+
+  totdiam = totdiam / totL
+
+/*  print "Final length: ", totL
+  print "Final diameter: ", totdiam*/
+
+  setEquivSec(totL, totdiam, Ra, $s2, my_g_pas)
+
+  //return totL
+}
+
+// Calc conductance nS from channel density [S/cm^2] and area [um^2]
+// $1: density
+// $2: area
+func from_S_per_cm2_by_area_um2_to_nS() { 
+  return $1 * $2 * 10
+}
+
+create equivSec
+proc setEquivSec() {
+  access equivSec
+  L = $1
+  diam = $2
+  Ra = $3
+  my_g_pas = $5
+  nseg = 1
+  printf("%s\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\n", $s4, L, diam, area(0.5), ri(0.5), cm*L*PI*diam*1e-2, from_S_per_cm2_by_area_um2_to_nS(my_g_pas, area(0.5)))
+// my_g_pas*area(0.5)*1e1
+// $s4, "\t", L, "\t", diam, "\t", area(0.5), "\t", ri(0.5), "\t", cm*(L/2)*PI*diam*1e-2
+// why L/2??
+}
+
+proc allsumLwavgD() {
+  print "Secname\tL (um)\tDiam (um)\tArea [um^2]\tRi [MO]\t\tCm [pF]\tg_pas [nS]"
+  sumLwavgD(axonic, "axon:")
+  sumLwavgD(somatic, "soma:")
+  sumLwavgD(bottomdendrite, "bottom dend:")
+  sumLwavgD(bottomdendritelessaxon, "botdend - axon:")
+  sumLwavgD(topdendrite, "topdend:")
+  if (section_exists("axon_ext")) {
+    sumLwavgD(ext_axonic, "ext. axon:")
+  }
+}
+
+allsumLwavgD()
+equivSec delete_section()

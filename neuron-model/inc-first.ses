@@ -1,0 +1,14 @@
+{load_file("nrngui.hoc")}
+objectvar save_window_, rvp_
+objectvar scene_vector_[5]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+{pwman_place(0,0,0)}
+
+// Load channel definitions
+// Load active channels so we can play with them
+{load_file("chan-DmNaT-ODowd.hoc")
+load_file("chan-DmNaP-DmNav10.hoc")
+load_file("chan-DmKdr-Marley.hoc")
+load_file("chan-DmKA-Marley.hoc")
+}

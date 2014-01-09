@@ -1,0 +1,214 @@
+// File to be included from other HOC and SES files
+
+//CG: define some functions
+proc set_Ra() { local save_elec_Ra
+  electrode save_elec_Ra = Ra
+  forsec all {
+    Ra = $1
+  }
+ // except electrode
+ electrode Ra = save_elec_Ra
+}
+
+proc set_g_pas() { local save_gpas
+  electrode save_gpas = g_pas
+  forsec all {
+    g_pas = $1
+  }
+ // except electrode
+ electrode g_pas = save_gpas
+}
+
+proc set_cm() { local save_elec_cm
+  electrode save_elec_cm = cm
+  forsec all {
+    cm = $1
+  }
+ // except electrode
+ electrode cm = save_elec_cm
+}
+
+proc print_elec_cell() {
+  // print out electrode properties
+  access electrode
+  print "Electrode:"
+  print "G_seal = ",  g_pas*L*diam*PI*1e1, "nS"
+  print "R_series = ",  ri(0.5)*2, "MO"
+  print "C_elec = ",  cm*L*diam*PI*1e-2, "pF"
+  print "Cell:"
+  soma print "Ra = ", Ra
+  soma print "g_pas = ", g_pas
+  soma print "cm = ", cm
+}
+
+proc set_g_seal_nS() {
+ electrode g_pas = $1/(L*diam*PI*1e1)
+}
+
+proc set_cap_elec_pF() {
+ electrode cm = $1/(L*diam*PI*1e-2)
+}
+
+proc set_R_series_MO() {
+ electrode Ra = $1*(diam(0.5)*diam(0.5)*PI/4*1e-8)/(L*1e-4*1e-6)
+}
+
+// ********************
+// automated capture from graphs
+
+objref xvec, yvec, savefile //, xline[10], yline[10]
+xvec=new Vector()
+yvec=new Vector()
+
+proc readGraph() { local graphindex, i, j
+graphindex = $1
+// copied from example
+// TODO make this one read the graph name and then save the whole
+// thing as a binary file to be read by trace
+j =0
+for (i=-1; (i = Graph[graphindex].getline(i, xvec, yvec)) != -1 ; j+=1 ) {
+        // xvec and yvec contain the line with Graph internal index i.
+        // and can be associated with the sequential index j.
+        print "#", i - 1, "label=", yvec.label
+        //xline[j] = xvec.c
+        //yline[j] = yvec.cl // clone label as well
+}
+
+}
+
+
+// saves a vector on graph into file 
+// saveCurrent(graphindex, lineindex, basefilename)
+// use View->Object Name to get graph index
+// run readGraph above to get line indices
+proc saveCurrent() { local graphindex, lineindex, i, j, n
+graphindex = $1
+strdef filename
+lineindex = $2 + 1
+i = Graph[graphindex].getline(lineindex, xvec, yvec)
+print "Size: ", xvec.size()
+// Build the filename with some more info like dt. 
+// dy should be specified in basefilename.
+sprint(filename, "%s_dt_%fms.bin", $s3, xvec.x[1] - xvec.x[0])
+savefile=new File(filename)
+savefile.wopen()
+n = yvec.vwrite(savefile)
+if (n == 1) { print "Wrote '", filename, "'.\n"
+}
+savefile.close()
+
+}
+
+objref longyvec
+
+// Saves array of vectors into file from graph.
+// saveLines(graphindex, lineindexstart, lineindexend, basefilename)
+// use View->Object Name to get graph index
+// run readGraph above to get line indices
+// Concatentates multiple same-size vectors into one long vector and 
+// puts info on filename for breaking it later. Takes indices lineindexstart 
+// to lineindexend inlusively. 
+// Example:
+// saveLines(2, 1, 11, "data-axon-tail2-chans-botdend")
+proc saveLines() { local graphindex, lineindexstart, numlines, vecsize, i, j, n
+graphindex = $1
+strdef filename
+// inclusive
+numlines = $3 - $2 + 1
+// Graph.getline needs -1 to give current line DUMB!
+lineindexstart = $2 - 1
+// get first one to estimate total size
+i = Graph[graphindex].getline(lineindexstart, xvec, yvec)
+print "#", lineindexstart + 1, " size: ", yvec.size()
+vecsize = xvec.size()
+print "Size: ", vecsize
+longyvec = new Vector()
+longyvec.buffer_size(vecsize * numlines)
+print "Allocating ", (vecsize * numlines), " elements."
+longyvec.insrt(0, yvec)
+// concat the other lines
+for ( lineindexstart=lineindexstart+1; lineindexstart < $3 ; lineindexstart=lineindexstart+1 ) { 
+  // this doesn't make any sense!!!! why +1????
+  i = Graph[graphindex].getline(lineindexstart+1, xvec, yvec)
+  print "#", lineindexstart + 1, " offset: ", (lineindexstart - $2 + 1)*vecsize, " size: ", yvec.size()
+  longyvec.insrt((lineindexstart - $2 + 1)*vecsize, yvec)
+}
+// Build the filename with some more info like dt. 
+// dy should be specified in basefilename.
+sprint(filename, "%s_%d_lines_dt_%fms.bin", $s4, numlines, xvec.x[1] - xvec.x[0])
+savefile=new File(filename)
+savefile.wopen()
+n = longyvec.vwrite(savefile)
+if (n == 1) { print "Wrote '", filename, "'.\n"
+}
+savefile.close()
+
+}
+
+// play a exp vector into an iclamp
+// Usage: expDecayIClamp(delay, maxI, tau, maxdur)
+// delay: initial delay [ms]
+// maxI: peak current [nA]
+// tau: decay time constant [ms]
+// maxdur: duration of decay [ms]
+objref expvec
+proc expDecayIClamp() { local i, dt, size, delay, maxI, tau, maxdur
+delay = $1 // ms
+maxI = $2 // nA
+tau = $3 // ms
+maxdur = $4 // ms
+dt=0.025
+
+// make it several taus long
+delayoff = int(delay / dt + .5)
+//size = delayoff + int((5 * tau) / dt + .5)
+size = delayoff + int((maxdur) / dt + .5)
+expvec = new Vector(size, 0)
+
+// make the exp decay
+for ( i = delayoff ; i < size ; i=i+1 ) { expvec.x[i] = maxI * exp((delayoff-i)*dt/tau) }
+
+// play into 1st iclamp
+expvec.play(&IClamp[0].amp, dt)
+
+}
+
+proc stopPlay() { expvec.play_remove() }
+
+/* ****************************************
+ * Save/restore state
+*/
+
+strdef state_file_name
+objref steady_state, state_fobj
+steady_state = new SaveState()
+
+// call finitialize() before saving state so that time is set to 0
+proc saveState() { 
+  steady_state.save()
+  state_fobj = new File(state_file_name)
+  steady_state.fwrite(state_fobj) }
+
+proc restoreState() { 
+  restoreStateFromFile(state_file_name)
+}
+
+proc restoreStateFromFile() { 
+  state_fobj = new File($s1)
+  // check if state file exists by opening it for reading
+  if (state_fobj.ropen() != 0) {
+    state_fobj.close() // close file opened for existence test
+    steady_state.fread(state_fobj)
+    steady_state.restore() 
+  } else { print "Warning: state file does not exist." }
+}
+
+proc runFromSavedState() {
+  restoreState()
+  run()
+}
+
+proc init() {
+  finitialize()
+  restoreState()
+}

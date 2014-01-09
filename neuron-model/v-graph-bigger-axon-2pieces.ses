@@ -1,0 +1,33 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[20]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+{
+xoffset = 0.75
+ymax = .9
+save_window_ = new Graph(0)
+save_window_.size(14.825,183.075,-63.1783,-7.46167)
+scene_vector_[17] = save_window_
+{save_window_.view(14.825, -63.1783, 168.25, 55.7167, 446, 493, 360, 312.64)}
+graphList[2].append(save_window_)
+save_window_.save_name("graphList[2].")
+i = 0
+save_window_.addvar("electrode", "electrode.v( 1 )", 1, 6, xoffset, ymax - i*0.005, 2)
+i = i + 1
+save_window_.addvar("soma", "soma[0].v( 0.5 )", 1, 1, xoffset, ymax - i*0.005, 2)
+i = i + 1
+save_window_.addvar("axon (prox)", "axon[13].v( 0.5 )", 6, 1, xoffset, ymax - i*0.005, 2)
+i = i + 1
+save_window_.addexpr("axon (mid)", "axon[7].v( 0.5 )", 2, 1, xoffset, ymax - i*0.005, 2)
+i = i + 1
+save_window_.addexpr("axon (dist)", "axon[0].v( 0.5 )", 5, 1, xoffset, ymax - i*0.005, 2)
+i = i + 1
+save_window_.addexpr("top dend", "dendrite[677].v( 0.5 )", 3, 1, xoffset, ymax - i*0.005, 2)
+i = i + 1
+save_window_.addexpr("bot dend", "dendrite[120].v( 0.5 )", 3, 6, xoffset, ymax - i*0.005, 2)
+i = i + 1
+save_window_.addexpr("axon ext (dist)", "axon_ext[1].v( 0.5)", 4, 6, xoffset, ymax - i*0.005, 2)
+i = i + 1
+}
+objectvar scene_vector_[1]
+{doNotify()}

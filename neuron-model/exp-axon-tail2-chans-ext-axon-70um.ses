@@ -1,0 +1,57 @@
+// Experiment with 2-component axon extention tail, and Na-K channels in all compartments 
+
+// nrngui stuff and ion chans
+load_file("inc-first.ses")
+
+strdef file_name, ses_file
+file_name = "ext-axon-70um"
+
+sprint(ses_file, "neuron-CB-ext-axon-2pieces-chans-%s.ses", file_name)
+
+//load CellBuilder
+{load_file(ses_file)}
+
+
+{
+xpanel("RunControl", 0)
+v_init = -60
+xvalue("Init","v_init", 1,"stdinit()", 1, 1 )
+xbutton("Init & Run","run()")
+xbutton("Stop","stoprun=1")
+runStopAt = 5
+xvalue("Continue til","runStopAt", 1,"{continuerun(runStopAt) stoprun=1}", 1, 1 )
+runStopIn = 1
+xvalue("Continue for","runStopIn", 1,"{continuerun(t + runStopIn) stoprun=1}", 1, 1 )
+xbutton("Single Step","steprun()")
+t = 200
+xvalue("t","t", 2 )
+tstop = 600
+xvalue("Tstop","tstop", 1,"tstop_changed()", 0, 1 )
+dt = 0.025
+xvalue("dt","dt", 1,"setdt()", 0, 1 )
+steps_per_ms = 40
+xvalue("Points plotted/ms","steps_per_ms", 1,"setdt()", 0, 1 )
+screen_update_invl = 0.1
+xvalue("Scrn update invl","screen_update_invl", 1,"", 0, 1 )
+realtime = 1.12
+xvalue("Real Time","realtime", 0,"", 0, 1 )
+xpanel(893,777)
+}
+
+// load common funcs
+load_file("fitfuncs.hoc")
+
+print_elec_cell()
+
+// calc morph stats
+load_file("stats.hoc")
+
+load_file("v-graph-bigger-axon-2pieces.ses")
+
+load_file("IClamp-steps.ses")
+
+// save state in this file
+sprint(state_file_name, "state-neuron-CB+act+elec+ext-axon-2piece-chans-%s.bin", file_name)
+
+// small adjustments
+IClamp[0].dur = 500
