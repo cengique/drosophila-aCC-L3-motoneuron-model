@@ -22,9 +22,9 @@ PANDORA 1.3b - http://software.incf.org/software/pandora
 
 ## Directories:
 
-xpp-models/	Isopotential and ball-and-stick models and their figures (see figure_models.m).
+**xpp-models/**	Isopotential and ball-and-stick models and their figures (see figure_models.m).
 
-morphological/	Multicompartmental model in Neuron (see figures.m).
+**neuron-model/** Multicompartmental model in Neuron (see figures.m).
 
 ## Workflow/history of project:
 - Channel data were fit with the Neurofit tool and then re-adjusted with param-fitter in Matlab.
@@ -34,5 +34,5 @@ morphological/	Multicompartmental model in Neuron (see figures.m).
 - Channel distribution hand tuned to mimick observed current responses.
 
 Please report problems/suggestions/comments to:
-Cengiz Gunay <cengique@users.sf.net>
+Cengiz Gunay <cengique AT users.sf.net>
 2014/01/08
