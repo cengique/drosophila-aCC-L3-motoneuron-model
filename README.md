@@ -33,6 +33,8 @@ PANDORA 1.3b - http://software.incf.org/software/pandora
 - Morphological reconstruction passive parameters were tuned to recorded capacitance responses.
 - Channel distribution hand tuned to mimick observed current responses.
 
-Please report problems/suggestions/comments to:
-Cengiz Gunay <cengique AT users.sf.net>
+Please report problems/suggestions/comments to: 
+
+Cengiz Gunay (cengique AT users.sf.net) 
+
 2014/01/08
