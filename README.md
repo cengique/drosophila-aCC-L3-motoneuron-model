@@ -9,6 +9,9 @@ an identified larval Drosophila motoneuron using a morphologically
 reconstructedor electrical model.
 *In preparation*.
 
+ModelDB accession number is: 152028
+https://senselab.med.yale.edu/modeldb/ShowModel.asp?model=152028
+
 Download from:
 http://www.biology.emory.edu/research/Prinz/Cengiz/Gunay_etal_2014.zip
 
@@ -18,13 +21,11 @@ XPPAUT 5.99 - http://www.math.pitt.edu/~bard/xpp/xpp.html
 
 Neuron 7.1 - http://www.neuron.yale.edu/neuron/
 
-PANDORA 1.3b - http://software.incf.org/software/pandora
-
 ## Directories:
 
-**xpp-models/**	Isopotential and ball-and-stick models and their figures (see figure_models.m).
+**xpp-models/**	Isopotential and ball-and-stick models.
 
-**neuron-model/** Multicompartmental model in Neuron (see figures.m).
+**neuron-model/** Multicompartmental model in Neuron. Use exp-axon-tail2-chans-ext-axon-70um.ses as the main file.
 
 ## Workflow/history of project:
 - Channel data were fit with the Neurofit tool and then re-adjusted with param-fitter in Matlab.
