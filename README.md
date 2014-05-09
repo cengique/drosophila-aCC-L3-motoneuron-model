@@ -15,6 +15,8 @@ https://senselab.med.yale.edu/modeldb/ShowModel.asp?model=152028
 Download from:
 http://www.biology.emory.edu/research/Prinz/Cengiz/Gunay_etal_2014.zip
 
+Single compartmental, ball-and-stick models implemented in XPP and full morphological model in Neuron. Paper is in preparation and correlates anatomical properties with electrophysiological recordings from these hard-to-access neurons. For instance we make predictions about location of the spike initiation zone, channel distributions, and synaptic input parameters.
+
 ## Requirements:
 
 XPPAUT 5.99 - http://www.math.pitt.edu/~bard/xpp/xpp.html
@@ -38,4 +40,4 @@ Please report problems/suggestions/comments to:
 
 Cengiz Gunay (cengique AT users.sf.net) 
 
-2014/01/08
+Updated - 2014/05/09
