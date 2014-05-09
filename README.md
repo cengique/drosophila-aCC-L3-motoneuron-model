@@ -9,6 +9,9 @@ an identified larval Drosophila motoneuron using a morphologically
 reconstructedor electrical model.
 *In preparation*.
 
+OpenSourceBrain page:
+http://www.opensourcebrain.org/projects/drosophila-acc-l3-motoneuron-gunay-et-al-2014
+
 ModelDB accession number is: 152028
 https://senselab.med.yale.edu/modeldb/ShowModel.asp?model=152028
 
