@@ -4,9 +4,7 @@ This the the modeling package to accompany paper:
 
 Cengiz Günay, Fred Sieling, Logesh Dharmar, Wei-Hsiang Lin, Verena
 Wolfram, Richard Marley, Richard A. Baines, and Astrid A. Prinz. 
-Estimation of spike initiation zone and synaptic input parameters of
-an identified larval Drosophila motoneuron using a morphologically
-reconstructedor electrical model.
+Title: TBD
 *In preparation*.
 
 OpenSourceBrain page:
