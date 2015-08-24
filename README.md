@@ -1,11 +1,9 @@
-# Drosophila 3rd instar larval aCC motoneuron
+### Drosophila 3rd instar larval aCC motoneuron
 
-This the the modeling package to accompany paper:
+This is the modeling package to accompany the paper:
 
-Cengiz Günay, Fred Sieling, Logesh Dharmar, Wei-Hsiang Lin, Verena
-Wolfram, Richard Marley, Richard A. Baines, and Astrid A. Prinz. 
-Title: TBD
-*In preparation*.
+Cengiz Günay, Fred Sieling, Logesh Dharmar, Wei-Hsiang Lin, Verena Wolfram, Richard Marley, Richard A. Baines, and Astrid A. Prinz. **Distal Spike Initiation Zone Location Estimation by Morphological Simulation of Ionic Current Filtering Demonstrated in a Novel Model of an Identified Drosophila Motoneuron**,
+[PLoS Comput Biol 2015, 11(5): e1004189](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004189)
 
 OpenSourceBrain page:
 http://www.opensourcebrain.org/projects/drosophila-acc-l3-motoneuron-gunay-et-al-2014
