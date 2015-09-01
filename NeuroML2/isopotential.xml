@@ -1,0 +1,202 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 LEMS_v0.7.3.xsd">
+
+
+     <!-- Work in progress - this is NOT intended for public use yet -->
+
+
+	<!-- NeuroML2 port of isopotential.ode. Parameter names and order follow original file. -->
+
+	<Include file="Simulation.xml"/>
+
+
+	<!-- Dirty fix to enable units in value="..." fields TODO-->
+	<Constant symbol="in_ms" value="0.001" dimension="time" />
+	<Constant symbol="in_mV" value="0.001" dimension="voltage" />
+
+
+	<ComponentType name="IsopotentialCell">
+
+		<Parameter name="gleak" dimension="conductance" />
+		<Parameter name="Eleak" dimension="voltage" />
+		<Parameter name="c" dimension="capacitance" />
+		<Parameter name="Vinit" dimension="voltage" />
+
+		<!-- slow K -->
+		<Parameter name="gKs" dimension="conductance" />
+		<Parameter name="EK" dimension="voltage" />
+		<Parameter name="mKsinit" dimension="none" />
+
+		<!-- fast K with 2 inactivation time constants -->
+		<Parameter name="gKf" dimension="conductance" />
+		<Parameter name="fh" dimension="none" />
+		<Parameter name="mKfinit" dimension="none" />
+		<Parameter name="hKfinit" dimension="none" />
+		<Parameter name="hKf2init" dimension="none" />
+
+		<!-- na -->
+		<!-- from O'Dowd and Aldrich (1988) -->
+		<Parameter name="ENa" dimension="voltage" />
+		<Parameter name="gNa" dimension="conductance" />
+		<Parameter name="mNainit" dimension="none" />
+		<Parameter name="hNainit" dimension="none" />
+
+		<!-- NaP from DmNav10 of WHL oocyte #1 -->
+		<Parameter name="gNaP" dimension="conductance" />
+		<Parameter name="mNaPinit" dimension="none" />
+
+
+		<Exposure name="V" dimension="voltage" />
+		<Exposure name="I" dimension="current" />
+		<Exposure name="Iks" dimension="current" />
+		<Exposure name="Ikf" dimension="current" />
+		<Exposure name="Ina" dimension="current" />
+		<Exposure name="Inap" dimension="current" />
+
+		<Dynamics>
+
+			<DerivedVariable name="I" dimension="current" select="ExternalCurrent/I" exposure="I" />
+			<StateVariable name="V" dimension="voltage" exposure="V" />
+			<TimeDerivative variable="V" value="-1/c*(Iks+Ikf+Ina+Inap+gleak*(V-Eleak)-I)" />
+
+			<!-- slow K -->
+			<DerivedVariable name="minfKs" dimension="none" value="1/(1+exp((V+12.85*in_mV)/(-19.91*in_mV)))" />
+			<DerivedVariable name="mtauKs" dimension="time" value="(2.03 + 1.96 /(1+exp((V-29.83*in_mV)/(3.32*in_mV)))) * in_ms" />
+			<StateVariable name="mKs" dimension="none" />
+			<TimeDerivative variable="mKs" value="(minfKs-mKs)/mtauKs" />
+			<DerivedVariable name="Iks" dimension="current" value="gKs*mKs^4*(V-EK)" exposure="Iks" />
+
+			<!-- fast K with 2 inactivation time constants -->
+			<StateVariable name="mKf" dimension="none" />
+			<TimeDerivative variable="mKf" value="(minfKf-mKf)/mtauKf" />
+			<StateVariable name="hKf" dimension="none" />
+			<TimeDerivative variable="hKf" value="(hinfK-hKf)/htauK" />
+			<StateVariable name="hKf2" dimension="none" />
+			<!-- TODO: Should the 116 in the ode-file be refactored as htauKf2? -->
+			<TimeDerivative variable="hKf2" value="(hinfK2-hKf)/(116 * in_ms)" />
+			<DerivedVariable name="Ikf" dimension="current" value="gKf*mKf^4*(fh*hKf + (1-fh)*hKf2)*(V-EK)" exposure="Ikf" />
+			<DerivedVariable name="minfKf" dimension="none" value="1/(1+exp((V+17.55*in_mV)/(-7.27*in_mV)))" />
+			<DerivedVariable name="mtauKf" dimension="time" value="(1.94+2.66/(1+exp((V-8.12*in_mV)/(7.96*in_mV)))) * in_ms" />
+			<DerivedVariable name="hinfK" dimension="none" value="1/(1+exp((V+45*in_mV)/(6*in_mV)))" />
+			<DerivedVariable name="htauK" dimension="time" value="(1.79+515.8/(1+exp((V+147.4*in_mV)/(28.66*in_mV)))) * in_ms" />
+			<!-- TODO: What does that mean in isopotential.ode: mistake; should be hinfK == hinfK2 -->
+			<DerivedVariable name="hinfK2" dimension="none" value="1/(1+exp((V+44.2*in_mV)/(1.5*in_mV)))" />
+
+			<!-- na -->
+			<!-- from O'Dowd and Aldrich (1988) -->
+			<StateVariable name="mNa" dimension="none" />
+			<TimeDerivative variable="mNa" value="(minfNa-mNa)/mtauNa" />
+			<StateVariable name="hNa" dimension="none" />
+			<TimeDerivative variable="hNa" value="(hinfNa-hNa)/htauNa" />
+			<DerivedVariable name="Ina" dimension="current" value="gNa*mNa^3*hNa*(V-ENa)" exposure="Ina" />
+			<DerivedVariable name="minfNa" dimension="none" value="1/(1+exp((V+29.13*in_mV)/(-8.922*in_mV)))" />
+			<DerivedVariable name="mtauNa" dimension="time" value="(3.861-3.434/(1+exp((V+51.35*in_mV)/(-5.98*in_mV)))) * in_ms" />
+			<DerivedVariable name="hinfNa" dimension="none" value="1/(1+exp((V+40*in_mV)/(6.048*in_mV)))" />
+			<DerivedVariable name="htauNa" dimension="time" value="(2.834-2.371/(1+exp((V+21.9*in_mV)/(-2.641*in_mV)))) * in_ms" />
+
+			<!-- NaP from DmNav10 of WHL oocyte #1 -->
+			<StateVariable name="mNaP" dimension="none" />
+			<TimeDerivative variable="mNaP" value="(minfNaP-mNaP)/mtauNaP" />
+			<DerivedVariable name="Inap" dimension="current" value="gNaP*mNaP*(V-ENa)" exposure="Inap" />
+			<DerivedVariable name="minfNaP" dimension="none" value="1/(1+exp((V+48.77*in_mV)/(-3.68*in_mV)))" />
+			<DerivedVariable name="mtauNaP" dimension="time" value="1 * in_ms" />
+
+
+			<OnStart>
+				<!-- Set initial values -->
+				<StateAssignment variable="V" value="Vinit" />
+				<StateAssignment variable="mKs" value="mKsinit" />
+				<StateAssignment variable="mKf" value="mKfinit" />
+				<StateAssignment variable="hKf" value="hKfinit" />
+				<StateAssignment variable="hKf2" value="hKf2init" />
+				<StateAssignment variable="mNa" value="mNainit" />
+				<StateAssignment variable="hNa" value="hNainit" />
+				<StateAssignment variable="mNaP" value="mNaPinit" />
+			</OnStart>
+
+		</Dynamics>
+
+		<Child name="ExternalCurrent" type="CurrentPulse" />
+
+	</ComponentType>
+
+
+
+	<ComponentType name="CurrentPulse">
+
+		<Parameter name="Ihold" dimension="current" />
+		<Parameter name="Ipulse" dimension="current" />
+		<Parameter name="from" dimension="time" />
+		<Parameter name="to" dimension="time" />
+		<Exposure name="I" dimension="current" />
+
+		<Dynamics>
+
+			<StateVariable name="I" dimension="current" exposure="I" />
+			<OnStart>
+				<StateAssignment variable="I" value="Ihold" />
+			</OnStart>
+			<OnCondition test="t .gt. from">
+				<StateAssignment variable="I" value="Ipulse" />
+			</OnCondition>
+			<OnCondition test="t .gt. to">
+				<StateAssignment variable="I" value="Ihold" />
+			</OnCondition>
+
+		</Dynamics>
+
+	</ComponentType>
+
+
+
+	<IsopotentialCell id="cell" c="4pF" 
+		gleak="6.8nS" Eleak="-55mV" Vinit="-54.56137733296305mV" 
+		gKs="50nS" EK="-80mV" mKsinit="0.1095841015345856" 
+		gKf="24.1nS" fh="0.95" mKfinit="0.006114411948700807" hKfinit="0.831116786237579" hKf2init="6.331878827270821"
+		ENa="45mV" gNa="100nS" mNainit="0.05466001581199555" hNainit="0.9174076713170543"
+		gNaP="0.8nS" mNaPinit="0.1716833324516358">
+
+		<ExternalCurrent type="CurrentPulse" Ihold="-12pA" Ipulse="0pA" from="10ms" to="510ms" />
+
+	</IsopotentialCell> 
+
+
+
+	<Simulation id="sim1" length="530ms" step="0.001ms" target="cell">
+    
+        <Display id="d1" title="Membrane Potential" timeScale="1ms" xmin="0" xmax="530" ymin="-60" ymax="0">
+            <Line id="V" quantity="V" scale="1mV"  color="#ffffff" timeScale="1ms" />
+            <!-- <Line id="I" quantity="I" scale="1pA"  color="#ff0000" timeScale="1ms" /> -->
+            <!-- <Line id="Iks" quantity="Iks" scale="1pA"  color="#00ff00" timeScale="1ms" /> -->
+            <!-- <Line id="Ikf" quantity="Ikf" scale="1pA"  color="#0000ff" timeScale="1ms" /> -->
+            <!-- <Line id="Ina" quantity="Ina" scale="1pA"  color="#ffff00" timeScale="1ms" /> -->
+            <!-- <Line id="Inap" quantity="Inap" scale="1pA"  color="#ff00ff" timeScale="1ms" /> -->
+
+            <!-- <Line id="hKf2" quantity="hKf2" scale="1"  color="#ff0000" timeScale="1ms" /> -->
+        </Display>
+
+        <!-- <OutputFile id="of0" fileName="isopotential.dat">
+            <OutputColumn id="V" quantity="V" />
+            <OutputColumn id="mKs" quantity="mKs" />
+            <OutputColumn id="mKf" quantity="mKf" />
+            <OutputColumn id="hKf" quantity="hKf" />
+            <OutputColumn id="hKf2" quantity="hKf2" />
+            <OutputColumn id="mNa" quantity="mNa" />
+            <OutputColumn id="hNa" quantity="hNa" />
+            <OutputColumn id="mNaP" quantity="mNaP" />
+            <OutputColumn id="Iks" quantity="Iks" />
+            <OutputColumn id="Ikf" quantity="Ikf" />
+            <OutputColumn id="Ina" quantity="Ina" />
+            <OutputColumn id="Inap" quantity="Inap" />
+            <OutputColumn id="I" quantity="I" />
+        </OutputFile> -->
+
+    </Simulation>
+
+    <Target component="sim1" />
+
+
+
+
+</Lems>
