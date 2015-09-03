@@ -1,0 +1,27 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.7.3"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 LEMS_v0.7.3.xsd">
+
+
+    <!-- Work in progress - this is NOT intended for public use yet -->
+
+    <!-- Include standard NeuroML2 ComponentType definitions -->
+    <Include file="Simulation.xml" />
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+
+    <Include file="isopotential.nml" />
+
+
+    <Target component="sim1" />
+
+    <Simulation id="sim1" length="530ms" step="0.001ms" target="net">      
+        <Display id="d1" title="Membrane Potential" timeScale="1ms" xmin="0" xmax="530" ymin="-60" ymax="0">
+            <Line id="v" quantity="pop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms" />
+        </Display>
+    </Simulation>
+
+
+</Lems>
