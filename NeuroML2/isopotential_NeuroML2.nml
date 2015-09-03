@@ -1,0 +1,94 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd"
+    id="IsopotentialCell">
+
+    <!-- Work in progress - this is NOT intended for public use yet -->
+    <!-- Pure NeuroML2 version of isopotential.ode. Uses  NeuroML2 ComponentTypes exclusively. Parameter names and order follow original file where possible. -->
+
+    <ionChannelPassive id="leak" conductance="6.8nS" />
+
+
+    <!-- slow K -->
+    <ionChannelHH id="Ks" conductance="50nS">
+        <gateHHtauInf id="mKs" instances="4">
+            <steadyState id="minfKs" type="HHSigmoidVariable" rate="1" midpoint="-12.85mV" scale="19.91mV" />
+
+            <!-- TODO: Implement time course. Problem: baseVoltageDepTime does currently only offer the implementation fixedTimeCourse, which does not allow for voltage-varying tau (as in the original model) -->
+            <timeCourse id="mtauKs" type="fixedTimeCourse" tau="1ms" />
+
+       </gateHHtauInf>
+    </ionChannelHH>
+
+
+    <!-- fast K with 2 inactivation time courses -->
+    <ionChannelHH id="Kf" conductance="24.1nS">
+        <gateHHtauInf id="mKf" instances="4">
+            <steadyState id="minfKf" type="HHSigmoidVariable" rate="1" midpoint="-17.55mV" scale="7.27mV" />
+
+            <!-- TODO: Implement time course -->
+            <timeCourse id="mtauKf" type="fixedTimeCourse" tau="1ms" />
+
+       </gateHHtauInf>
+
+        <!-- TODO: How to implement hKf and hKf2? -->
+
+    </ionChannelHH>
+
+
+    <!-- na -->
+    <!-- from O'Dowd and Aldrich (1988) -->
+    <ionChannelHH id="Na" conductance="100nS">
+        <gateHHtauInf id="mNa" instances="3">
+            <steadyState id="minfNa" type="HHSigmoidVariable" rate="1" midpoint="-29.13mV" scale="8.922mV" />
+
+            <!-- TODO: Implement time course -->
+            <timeCourse id="mtauNa" type="fixedTimeCourse" tau="1ms" />
+
+       </gateHHtauInf>
+       <gateHHtauInf id="hNa" instances="1">
+            <steadyState id="hinfNa" type="HHSigmoidVariable" rate="1" midpoint="-40mV" scale="-6.048mV" />
+
+            <!-- TODO: Implement time course -->
+            <timeCourse id="htauNa" type="fixedTimeCourse" tau="1ms" />
+
+       </gateHHtauInf>
+    </ionChannelHH>
+
+
+
+    <!-- NaP from DmNav10 of WHL oocyte #1 -->
+    <ionChannelHH id="NaP" conductance="0.8nS">
+        <gateHHtauInf id="mNaP" instances="1">
+            <steadyState id="minfNaP" type="HHSigmoidVariable" rate="1" midpoint="-48.77mV" scale="3.68mV" />
+            <timeCourse id="mtauNaP" type="fixedTimeCourse" tau="1ms" />
+       </gateHHtauInf>
+    </ionChannelHH>
+
+
+
+    <pointCellCondBased id="isopotentialCell" C="4pF" v0="-54.56137733296305mV" thresh="-25mV">
+
+        <!-- TODO: ionChannels currently use conductances of complete cell. Does it make sense to use the number attribute here instead? -->
+        <!-- TODO: How to define initital values for gating variables? -->
+    	<channelPopulation ionChannel="leak" erev="-55mV" number="1" />
+        <channelPopulation ionChannel="Ks" erev="-80mV" number="1" />
+        <channelPopulation ionChannel="Kf" erev="-80mV" number="1" />
+        <channelPopulation ionChannel="Na" erev="45mV" number="1" />
+        <channelPopulation ionChannel="NaP" erev="45mV" number="1" />
+
+    </pointCellCondBased>
+
+
+    <pulseGenerator id="pulseGenStart" delay="0ms" duration="10ms" amplitude="-12pA" />
+    <pulseGenerator id="pulseGenEnd" delay="510ms" duration="20ms" amplitude="-12pA" />
+
+
+    <network id="net">
+    	<population id="pop" component="isopotentialCell" size="1" />
+    	<explicitInput target="pop[0]" input="pulseGenStart" destination="synapses" />
+        <explicitInput target="pop[0]" input="pulseGenEnd" destination="synapses" />
+    </network>
+
+
+</neuroml>

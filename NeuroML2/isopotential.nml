@@ -67,7 +67,7 @@
 
 
 
-    <pointCellCondBased id="isopotentialCell" C="4pF" v0="-54.56137733296305mV" thresh="-20mV">
+    <pointCellCondBased id="isopotentialCell" C="4pF" v0="-54.56137733296305mV" thresh="-25mV">
 
         <!-- TODO: ionChannels currently use conductances of complete cell. Does it make sense to use the number attribute here instead? -->
         <!-- TODO: How to define initital values for gating variables? -->
