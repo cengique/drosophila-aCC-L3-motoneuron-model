@@ -1,7 +1,7 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation  
 
 
-target: run_isopotential_NeuroML2.xml
+target: isopotential_NeuroML2/run.xml
 engine: jNeuroML
 mep: .isopotential.mep
 
@@ -10,7 +10,7 @@ experiments:
     observables:
       spike times:
         file: 
-          path: isopotential_NeuroML2.dat
+          path: isopotential_NeuroML2/isopotential_NeuroML2.dat
           columns: [0,1]
           scaling: [1000, 1000]
         spike detection: 

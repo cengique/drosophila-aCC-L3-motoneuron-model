@@ -1,0 +1,25 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd"
+    id="isopotential">
+
+    <!-- Work in progress - this is NOT intended for public use yet -->
+    <!-- Pure NeuroML2 version of isopotential.ode. Uses  NeuroML2 ComponentTypes exclusively. Parameter names and order follow original file where possible. -->
+
+    <Include file="leak.channel.nml" />
+    <Include file="Ks.channel.nml" />
+    <Include file="Kf.channel.nml" />
+    <Include file="Na.channel.nml" />
+    <Include file="NaP.channel.nml" />
+
+    <pointCellCondBased id="isopotential" C="4pF" v0="-54.56137733296305mV" thresh="-25mV">
+
+    	<channelPopulation ionChannel="leak" erev="-55mV" number="1" />
+        <channelPopulation ionChannel="Ks" erev="-80mV" number="1" />
+        <channelPopulation ionChannel="Kf" erev="-80mV" number="1" />
+        <channelPopulation ionChannel="Na" erev="45mV" number="1" />
+        <channelPopulation ionChannel="NaP" erev="45mV" number="1" />
+
+    </pointCellCondBased>
+
+</neuroml>

@@ -1,0 +1,17 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd"
+    id="network">
+
+	<Include file="isopotential.cell.nml" />
+
+	<pulseGenerator id="pulseGenStart" delay="0ms" duration="10ms" amplitude="-12pA" />
+    <pulseGenerator id="pulseGenEnd" delay="510ms" duration="20ms" amplitude="-12pA" />
+
+    <network id="network">
+    	<population id="pop" component="isopotential" size="1" />
+    	<explicitInput target="pop[0]" input="pulseGenStart" destination="synapses" />
+        <explicitInput target="pop[0]" input="pulseGenEnd" destination="synapses" />
+    </network>
+
+</neuroml>

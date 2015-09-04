@@ -1,0 +1,17 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd"
+    id="Ks">
+
+	<!-- slow K -->
+    <ionChannelHH id="Ks" conductance="50nS">
+        <gateHHtauInf id="mKs" instances="4">
+            <steadyState id="minfKs" type="HHSigmoidVariable" rate="1" midpoint="-12.85mV" scale="19.91mV" />
+
+            <!-- TODO: Implement time course. Problem: baseVoltageDepTime does currently only offer the implementation fixedTimeCourse, which does not allow for voltage-varying tau (as in the original model) -->
+            <timeCourse id="mtauKs" type="fixedTimeCourse" tau="1ms" />
+
+       </gateHHtauInf>
+    </ionChannelHH>
+
+</neuroml>
