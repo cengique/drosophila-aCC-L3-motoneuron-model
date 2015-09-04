@@ -11,9 +11,6 @@
 	<Include file="Simulation.xml"/>
 
 
-	<!-- Dirty fix to enable units in value="..." fields TODO-->
-	<Constant symbol="in_ms" value="0.001" dimension="time" />
-	<Constant symbol="in_mV" value="0.001" dimension="voltage" />
 
 
 	<ComponentType name="IsopotentialCell">
@@ -46,6 +43,9 @@
 		<Parameter name="gNaP" dimension="conductance" />
 		<Parameter name="mNaPinit" dimension="none" />
 
+        <!-- Dirty fix to enable units in value="..." fields TODO-->
+        <Constant name="in_ms" value="1ms" dimension="time" />
+        <Constant name="in_mV" value="1mV" dimension="voltage" />
 
 		<Exposure name="V" dimension="voltage" />
 		<Exposure name="I" dimension="current" />
