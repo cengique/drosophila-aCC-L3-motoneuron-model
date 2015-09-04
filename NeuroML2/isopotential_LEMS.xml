@@ -3,13 +3,12 @@
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 LEMS_v0.7.3.xsd">
 
 
-     <!-- Work in progress - this is NOT intended for public use yet -->
+    <!-- Work in progress - this is NOT intended for public use yet -->
 
 
 	<!-- LEMS port of isopotential.ode. Parameter names and order follow original file where possible. -->
 
 	<Include file="Simulation.xml"/>
-
 
 
 

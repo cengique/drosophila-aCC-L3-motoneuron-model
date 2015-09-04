@@ -10,14 +10,14 @@
             <steadyState id="minfNa" type="HHSigmoidVariable" rate="1" midpoint="-29.13mV" scale="8.922mV" />
 
             <!-- TODO: Implement time course -->
-            <timeCourse id="mtauNa" type="fixedTimeCourse" tau="1ms" />
+            <timeCourse id="mtauNa" type="sigmoidOffsetTimeCourse" offset="3.861ms" rate="-3.434ms" midpoint="-51.35mV" scale="5.98mV" />
 
        </gateHHtauInf>
        <gateHHtauInf id="hNa" instances="1">
             <steadyState id="hinfNa" type="HHSigmoidVariable" rate="1" midpoint="-40mV" scale="-6.048mV" />
 
             <!-- TODO: Implement time course -->
-            <timeCourse id="htauNa" type="fixedTimeCourse" tau="1ms" />
+            <timeCourse id="htauNa" type="sigmoidOffsetTimeCourse" offset="2.834ms" rate="-2.371ms" midpoint="-21.9mV" scale="2.641mV" />
 
        </gateHHtauInf>
     </ionChannelHH>

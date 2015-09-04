@@ -10,7 +10,7 @@
             <steadyState id="minfKf" type="HHSigmoidVariable" rate="1" midpoint="-17.55mV" scale="7.27mV" />
 
             <!-- TODO: Implement time course -->
-            <timeCourse id="mtauKf" type="fixedTimeCourse" tau="1ms" />
+            <timeCourse id="mtauKf" type="sigmoidOffsetTimeCourse" offset="1.94ms" rate="2.66ms" midpoint="8.12mV" scale="-7.96mV" />
 
        </gateHHtauInf>
 
