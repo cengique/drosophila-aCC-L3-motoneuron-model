@@ -6,17 +6,42 @@
 
 	<!-- fast K with 2 inactivation time courses -->
     <ionChannelHH id="Kf" conductance="24.1nS">
-        <gateHHtauInf id="mKf" instances="4">
+
+        <gateHHtauInf id="mKf" instances="4" q0="0.006114411948700807">
             <steadyState id="minfKf" type="HHSigmoidVariable" rate="1" midpoint="-17.55mV" scale="7.27mV" />
-
-            <!-- TODO: Implement time course -->
             <timeCourse id="mtauKf" type="sigmoidOffsetTimeCourse" offset="1.94ms" rate="2.66ms" midpoint="8.12mV" scale="-7.96mV" />
-
        </gateHHtauInf>
 
-        <!-- TODO: How to implement hKf and hKf2? -->
+       <gateHHtauInfTwoParts instances="1" ratioFirstPart="0.95">
+
+            <firstPart type="gateHHtauInf" id="hKf" instances="1">
+                <steadyState id="hinfK" type="HHSigmoidVariable" rate="1" midpoint="-45mV" scale="-6mV" />
+                <timeCourse id="htauK" type="sigmoidOffsetTimeCourse" offset="1.79ms" rate="515.8ms" midpoint="-147.4mV" scale="-28.66mV" />
+            </firstPart>
+
+            <secondPart type="gateHHtauInf" id="hKf2" instances="1">
+                <steadyState id="hinfK2" type="HHSigmoidVariable" rate="1" midpoint="-44.2mV" scale="-1.5mV" />
+                <timeCourse id="htauK2" type="fixedTimeCourse" tau="116ms" />
+            </secondPart>
+
+       </gateHHtauInfTwoParts>
 
     </ionChannelHH>
+
+
+    <ComponentType name="gateHHtauInfTwoParts" extends="gateHHtauInf">
+        <Parameter name="ratioFirstPart" dimension="none" />
+
+        <Child name="firstPart" type="baseGate" />
+        <Child name="secondPart" type="baseGate" />
+
+        <Dynamics>
+            <DerivedVariable name="q1" dimension="none" select="firstPart/q" />
+            <DerivedVariable name="q2" dimension="none" select="secondPart/q" />
+            <DerivedVariable name="q" dimension="none" exposure="q" value="ratioFirstPart * q1 + (1 - ratioFirstPart) * q2" />
+            <DerivedVariable name="fcond" dimension="none" exposure="fcond" value="q^instances" />
+        </Dynamics>
+    </ComponentType>
     
 
 </neuroml>
