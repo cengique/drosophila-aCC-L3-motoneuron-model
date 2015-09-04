@@ -12,7 +12,7 @@
     <Include file="Simulation.xml"/>
 
 
-    <Include file="isopotential.nml" />
+    <Include file="isopotential_NeuroML2.nml" />
 
 
     <Target component="sim1" />
