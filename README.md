@@ -28,6 +28,8 @@ Neuron 7.1 - http://www.neuron.yale.edu/neuron/
 
 **neuron-model/** Multicompartmental model in Neuron. Use exp-axon-tail2-chans-ext-axon-70um.ses as the main file.
 
+**NeuroML2/** (*Under Construction*) Ports of all models to NeuroML2 and LEMS. [![Build Status](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model.svg)](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model)
+
 ## Workflow/history of project:
 - Channel data were fit with the Neurofit tool and then re-adjusted with param-fitter in Matlab.
 - XPP models were built with these channels and hand-tuned to fit observed f-I, v-I, and delay.
