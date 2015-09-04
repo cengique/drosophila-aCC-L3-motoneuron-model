@@ -1,3 +1,5 @@
 *~
 NeuroML2/*.dat
 NeuroML2/*.ode
+NeuroML2/isopotential_NeuroML2/*.dat
+NeuroML2/isopotential_NeuroML2/*.ode
