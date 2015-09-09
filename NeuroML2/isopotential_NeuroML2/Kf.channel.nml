@@ -3,16 +3,18 @@
     xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd"
     id="Kf">
 
+    <Include file="sigmoidOffsetTimeCourse.xml"/>
 
-	<!-- fast K with 2 inactivation time courses -->
-    <ionChannelHH id="Kf" conductance="24.1nS">
+    <ionChannelHH id="Kf" conductance="24.1nS" species="k"> 
+        
+        <notes>Fast K with 2 inactivation time courses</notes>
 
         <gateHHtauInf id="mKf" instances="4" q0="0.006114411948700807">
             <steadyState id="minfKf" type="HHSigmoidVariable" rate="1" midpoint="-17.55mV" scale="7.27mV" />
             <timeCourse id="mtauKf" type="sigmoidOffsetTimeCourse" offset="1.94ms" rate="2.66ms" midpoint="8.12mV" scale="-7.96mV" />
        </gateHHtauInf>
 
-       <gateHHtauInfTwoParts instances="1" ratioFirstPart="0.95">
+       <gateHHtauInfTwoParts id="hKf_hKf2" instances="1" ratioFirstPart="0.95">
 
             <firstPart type="gateHHtauInf" id="hKf" instances="1">
                 <steadyState id="hinfK" type="HHSigmoidVariable" rate="1" midpoint="-45mV" scale="-6mV" />
