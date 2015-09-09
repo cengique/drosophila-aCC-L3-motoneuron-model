@@ -3,11 +3,9 @@
     xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd"
     id="Na">
 
-    <Include file="sigmoidOffsetTimeCourse.xml"/>
-    
-    <ionChannelHH id="Na" conductance="100nS" species="na">
-        
-        <notes>Na channel from O'Dowd and Aldrich (1988)</notes>
+    <!-- na -->
+    <!-- from O'Dowd and Aldrich (1988) -->
+    <ionChannelHH id="Na" conductance="100nS">
 
         <gateHHtauInf id="mNa" instances="3">
             <steadyState id="minfNa" type="HHSigmoidVariable" rate="1" midpoint="-29.13mV" scale="8.922mV" />

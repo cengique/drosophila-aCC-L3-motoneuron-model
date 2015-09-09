@@ -3,12 +3,8 @@
     xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd"
     id="NaP">
 
-    <Include file="sigmoidOffsetTimeCourse.xml"/>
-    
-    <ionChannelHH id="NaP" conductance="0.8nS" species="na">
-        
-        <notes>NaP from DmNav10 of WHL oocyte #1</notes>
-        
+    <!-- NaP from DmNav10 of WHL oocyte #1 -->
+    <ionChannelHH id="NaP" conductance="0.8nS">
         <gateHHtauInf id="mNaP" instances="1">
             <steadyState id="minfNaP" type="HHSigmoidVariable" rate="1" midpoint="-48.77mV" scale="3.68mV" />
             <timeCourse id="mtauNaP" type="fixedTimeCourse" tau="1ms" />
