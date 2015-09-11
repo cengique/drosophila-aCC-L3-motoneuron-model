@@ -3,13 +3,9 @@
       xsi:schemaLocation="http://www.neuroml.org/lems/0.7.3 LEMS_v0.7.3.xsd">
 
 
-    <!-- Work in progress - this is NOT intended for public use yet -->
-
-
-	<!-- LEMS port of isopotential.ode. Parameter names and order follow original file where possible. -->
+	<!-- LEMS port of xpp-models/isopotential.ode. Parameter names and order follow original file where possible. -->
 
 	<Include file="Simulation.xml"/>
-
 
 
 	<ComponentType name="IsopotentialCell">
@@ -79,7 +75,6 @@
 			<DerivedVariable name="mtauKf" dimension="time" value="(1.94+2.66/(1+exp((V-8.12*in_mV)/(7.96*in_mV)))) * in_ms" />
 			<DerivedVariable name="hinfK" dimension="none" value="1/(1+exp((V+45*in_mV)/(6*in_mV)))" />
 			<DerivedVariable name="htauK" dimension="time" value="(1.79+515.8/(1+exp((V+147.4*in_mV)/(28.66*in_mV)))) * in_ms" />
-			<!-- TODO: What does that mean in isopotential.ode: mistake; should be hinfK == hinfK2 -->
 			<DerivedVariable name="hinfK2" dimension="none" value="1/(1+exp((V+44.2*in_mV)/(1.5*in_mV)))" />
 
 			<!-- na -->
@@ -171,8 +166,6 @@
             <!-- <Line id="Ikf" quantity="Ikf" scale="1pA"  color="#0000ff" timeScale="1ms" /> -->
             <!-- <Line id="Ina" quantity="Ina" scale="1pA"  color="#ffff00" timeScale="1ms" /> -->
             <!-- <Line id="Inap" quantity="Inap" scale="1pA"  color="#ff00ff" timeScale="1ms" /> -->
-
-            <!-- <Line id="hKf2" quantity="hKf2" scale="1"  color="#ff0000" timeScale="1ms" /> -->
         </Display>
 
         <OutputFile fileName="isopotential_LEMS.dat">
@@ -182,8 +175,6 @@
     </Simulation>
 
     <Target component="sim1" />
-
-
 
 
 </Lems>

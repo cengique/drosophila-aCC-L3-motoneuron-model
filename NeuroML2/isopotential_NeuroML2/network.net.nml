@@ -3,6 +3,8 @@
     xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta2.xsd"
     id="network">
 
+    <!-- Simple network with a single cell and a current pulse. -->
+
 	<Include file="isopotential.cell.nml" />
 
 	<pulseGenerator id="pulseGenStart" delay="0ms" duration="10ms" amplitude="-12pA" />
