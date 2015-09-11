@@ -10,8 +10,8 @@
         <notes>Slow K channel</notes>
         
         <gateHHtauInf id="mKs" instances="4">
-            <steadyState type="HHSigmoidVariable" rate="1" midpoint="-12.85mV" scale="19.91mV" />
-            <timeCourse type="sigmoidOffsetTimeCourse" offset="2.03ms" rate="1.96ms" midpoint="29.83mV" scale="-3.32mV" />
+            <steadyState id="minfKs" type="HHSigmoidVariable" rate="1" midpoint="-12.85mV" scale="19.91mV" />
+            <timeCourse id="mtauKs" type="sigmoidOffsetTimeCourse" offset="2.03ms" rate="1.96ms" midpoint="29.83mV" scale="-3.32mV" />
        </gateHHtauInf>
        
     </ionChannelHH>

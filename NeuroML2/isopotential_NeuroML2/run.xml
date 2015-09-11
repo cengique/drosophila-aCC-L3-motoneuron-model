@@ -11,9 +11,6 @@
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
 
-    <!-- TODO: Include this here or in the .channel.nml files? -->
-    <Include file="sigmoidOffsetTimeCourse.xml" />
-
     <Include file="network.net.nml" />
 
     <Target component="sim1" />
