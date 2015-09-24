@@ -9,22 +9,20 @@
         
         <notes>Fast K with 2 inactivation time courses</notes>
 
-        <gateHHtauInf id="mKf" instances="4" q0="0.006114411948700807">
+        <gateHHtauInf id="mKf" instances="4">
             <steadyState id="minfKf" type="HHSigmoidVariable" rate="1" midpoint="-17.55mV" scale="7.27mV" />
             <timeCourse id="mtauKf" type="sigmoidOffsetTimeCourse" offset="1.94ms" rate="2.66ms" midpoint="8.12mV" scale="-7.96mV" />
        </gateHHtauInf>
 
        <gateHHtauInfTwoParts id="hKf_hKf2" instances="1" ratioFirstPart="0.95">
 
-            <firstPart type="gateHHtauInf" id="hKf" instances="1">
-                <steadyState id="hinfK" type="HHSigmoidVariable" rate="1" midpoint="-45mV" scale="-6mV" />
-                <timeCourse id="htauK" type="sigmoidOffsetTimeCourse" offset="1.79ms" rate="515.8ms" midpoint="-147.4mV" scale="-28.66mV" />
-            </firstPart>
+            <!-- hKf -->
+            <steadyState id="hinfK" type="HHSigmoidVariable" rate="1" midpoint="-45mV" scale="-6mV" />
+            <timeCourse id="htauK" type="sigmoidOffsetTimeCourse" offset="1.79ms" rate="515.8ms" midpoint="-147.4mV" scale="-28.66mV" />
 
-            <secondPart type="gateHHtauInf" id="hKf2" instances="1">
-                <steadyState id="hinfK2" type="HHSigmoidVariable" rate="1" midpoint="-44.2mV" scale="-1.5mV" />
-                <timeCourse id="htauK2" type="fixedTimeCourse" tau="116ms" />
-            </secondPart>
+            <!-- hKf2 -->
+            <steadyState2 id="hinfK2" type="HHSigmoidVariable" rate="1" midpoint="-44.2mV" scale="-1.5mV" />
+            <timeCourse2 id="htauK2" type="fixedTimeCourse" tau="116ms" />
 
        </gateHHtauInfTwoParts>
 
@@ -34,14 +32,45 @@
     <ComponentType name="gateHHtauInfTwoParts" extends="gateHHtauInf">
         <Parameter name="ratioFirstPart" dimension="none" />
 
-        <Child name="firstPart" type="baseGate" />
-        <Child name="secondPart" type="baseGate" />
+        <!-- <Child name="firstPart" type="baseGate" /> -->
+        <!-- <Child name="secondPart" type="baseGate" /> -->
+
+        <Child name="timeCourse2" type="baseVoltageDepTime" />
+        <Child name="steadyState2" type="baseVoltageDepVariable" />
+        <Child name="q10Settings2" type="baseQ10Settings" />
+
+        <Exposure name="q1" dimension="none" />
+        <Exposure name="q2" dimension="none" />
+        
+
 
         <Dynamics>
-            <DerivedVariable name="q1" dimension="none" select="firstPart/q" />
-            <DerivedVariable name="q2" dimension="none" select="secondPart/q" />
+
+            <!-- TODO: Fix the select/value field here -->
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" value="1" reduce="multiply" required="false"/>
+            <DerivedVariable name="inf" dimension="none" exposure="inf" select="steadyState/x"/>
+            <DerivedVariable name="tauUnscaled" dimension="time" select="timeCourse/t"/>
+            <DerivedVariable name="tau" dimension="time" exposure="tau" value="tauUnscaled / rateScale"/>
+
+            <DerivedVariable name="rateScale2" dimension="none" value="1" reduce="multiply" required="false"/>
+            <DerivedVariable name="inf2" dimension="none" select="steadyState2/x"/>
+            <DerivedVariable name="tauUnscaled2" dimension="time" select="timeCourse2/t"/>
+            <DerivedVariable name="tau2" dimension="time" value="tauUnscaled2 / rateScale2"/>
+
+            <StateVariable name="q1" dimension="none" exposure="q1" />
+            <StateVariable name="q2" dimension="none" exposure="q2" />
+            <TimeDerivative variable="q1" value="(inf - q1) / tau"/>
+            <!-- Note that this uses q1 -->
+            <TimeDerivative variable="q2" value="(inf2 - q1) / tau2"/>
+
             <DerivedVariable name="q" dimension="none" exposure="q" value="ratioFirstPart * q1 + (1 - ratioFirstPart) * q2" />
             <DerivedVariable name="fcond" dimension="none" exposure="fcond" value="q^instances" />
+
+            <OnStart>
+                <StateAssignment variable="q1" value="inf"/>
+                <StateAssignment variable="q2" value="inf2"/>
+            </OnStart>
+
         </Dynamics>
     </ComponentType>
     

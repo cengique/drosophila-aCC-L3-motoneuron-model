@@ -146,10 +146,10 @@
 
 	<IsopotentialCell id="cell" c="4pF" 
 		gleak="6.8nS" Eleak="-55mV" Vinit="-54.56137733296305mV" 
-		gKs="50nS" EK="-80mV" mKsinit="0.1095841015345856" 
-		gKf="24.1nS" fh="0.95" mKfinit="0.006114411948700807" hKfinit="0.831116786237579" hKf2init="6.331878827270821"
-		gNa="100nS" ENa="45mV" mNainit="0.05466001581199555" hNainit="0.9174076713170543"
-		gNaP="0.8nS" mNaPinit="0.1716833324516358">
+		gKs="50nS" EK="-80mV" mKsinit="0.10958410153422569" 
+		gKf="24.1nS" fh="0.95" mKfinit="0.0061144119486309977" hKfinit="0.83111678624803209" hKf2init="0.99900082893646969"
+		gNa="100nS" ENa="45mV" mNainit="0.054660015811734484" hNainit="0.91740767131784051"
+		gNaP="0.8nS" mNaPinit="0.17168333245095557">
 
 		<ExternalCurrent type="CurrentPulse" Ihold="-12pA" Ipulse="0pA" from="10ms" to="510ms" />
 

@@ -15,12 +15,29 @@
     <Target component="sim1" />
 
     <Simulation id="sim1" length="530ms" step="0.001ms" target="network">      
-        <Display id="d1" title="Membrane Potential" timeScale="1ms" xmin="0" xmax="530" ymin="-60" ymax="0">
+        <Display id="d1" title="Membrane Potential" timeScale="1ms" xmin="0" xmax="530" ymin="-55" ymax="-5">
             <Line id="v" quantity="pop[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms" />
+        </Display>
+
+        <Display id="d2" title="Gates" timeScale="1ms" xmin="0" xmax="530" ymin="0" ymax="1">
+            <Line id="mKs" quantity="pop[0]/Ks/ionChannel/mKs/q" scale="1"  color="#ff0000" timeScale="1ms" />
+            <Line id="mKf" quantity="pop[0]/Kf/ionChannel/mKf/q" scale="1"  color="#00ff00" timeScale="1ms" />
+            <Line id="hKf" quantity="pop[0]/Kf/ionChannel/hKf_hKf2/q1" scale="1"  color="#0000ff" timeScale="1ms" />
+            <Line id="hKf2" quantity="pop[0]/Kf/ionChannel/hKf_hKf2/q2" scale="1"  color="#ffff00" timeScale="1ms" />
+            <Line id="mNa" quantity="pop[0]/Na/ionChannel/mNa/q" scale="1"  color="#00ffff" timeScale="1ms" />
+            <Line id="hNa" quantity="pop[0]/Na/ionChannel/hNa/q" scale="1"  color="#ff00ff" timeScale="1ms" />
+            <Line id="mNaP" quantity="pop[0]/NaP/ionChannel/mNaP/q" scale="1"  color="#ffffff" timeScale="1ms" />
         </Display>
 
         <OutputFile fileName="isopotential_NeuroML2.dat">
             <OutputColumn id="v" quantity="pop[0]/v" />
+            <OutputColumn id="mKs" quantity="pop[0]/Ks/ionChannel/mKs/q" />
+            <OutputColumn id="mKf" quantity="pop[0]/Kf/ionChannel/mKf/q" />
+            <OutputColumn id="hKf" quantity="pop[0]/Kf/ionChannel/hKf_hKf2/q1" />
+            <OutputColumn id="hKf2" quantity="pop[0]/Kf/ionChannel/hKf_hKf2/q2" />
+            <OutputColumn id="mNa" quantity="pop[0]/Na/ionChannel/mNa/q" />
+            <OutputColumn id="hNa" quantity="pop[0]/Na/ionChannel/hNa/q" />
+            <OutputColumn id="mNaP" quantity="pop[0]/NaP/ionChannel/mNaP/q" />
         </OutputFile>
 
     </Simulation>

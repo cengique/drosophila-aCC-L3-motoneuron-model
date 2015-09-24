@@ -13,11 +13,11 @@
 
     <pointCellCondBased id="isopotential" C="4pF" v0="-54.56137733296305mV" thresh="-25mV">
 
-    	<channelPopulation ionChannel="leak" erev="-55mV" number="1" />
-        <channelPopulation ionChannel="Ks" erev="-80mV" number="1" />
-        <channelPopulation ionChannel="Kf" erev="-80mV" number="1" />
-        <channelPopulation ionChannel="Na" erev="45mV" number="1" />
-        <channelPopulation ionChannel="NaP" erev="45mV" number="1" />
+    	<channelPopulation id="leak" ionChannel="leak" erev="-55mV" number="1" />
+        <channelPopulation id="Ks" ionChannel="Ks" erev="-80mV" number="1" />
+        <channelPopulation id="Kf" ionChannel="Kf" erev="-80mV" number="1" />
+        <channelPopulation id="Na" ionChannel="Na" erev="45mV" number="1" />
+        <channelPopulation id="NaP" ionChannel="NaP" erev="45mV" number="1" />
 
     </pointCellCondBased>
 

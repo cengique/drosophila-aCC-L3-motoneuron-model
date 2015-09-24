@@ -59,16 +59,17 @@ minfNap(V) = 1/(1+exp((V+48.77)/(-3.68)))
 mtauNap(V) = 1
 aux Inap=Inap
 
-global 1 t {I=Ihold}    
+# TODO: Setting I at start does not work as expected; hence, this line is currently commented out and I is manually set to -12 at start (see below). See also issue #7.
+#global 1 t {I=Ihold}    
 global 1 t-10 {I=Ipulse}  
 global 1 t-510 {I=Ihold}  
 
-# initial conditions for settled at I=-12
-# easiest way is to get this is to save "info" from File menu
-init V=-54.56137733296305, MKS=0.1095841015345856, MKF=0.006114411948700807, HKF=0.831116786237579, HKF2=6.331878827270821, MNA=0.05466001581199555, HNA=0.9174076713170543, MNAP=0.1716833324516358
+# initial V for settled at I=-12 (easiest way is to get this is to save "info" from File menu)
+# initial gate values from respective inf values at initial V
+init V=-54.56137733296305, MKS=0.10958410153422569, MKF=0.0061144119486309977, HKF=0.83111678624803209, HKF2=0.99900082893646969, MNA=0.054660015811734484, HNA=0.91740767131784051, MNAP=0.17168333245095557
 
-@ total=530,bounds=10000000000,meth=euler,dt=.001, nout=100, maxstor=10000000  
+@ total=530,bounds=10000000000,meth=euler,dt=.001, nout=1, maxstor=10000000  
 
-par I=0 c=4 Ipulse=0 Ihold=-12
+par I=-12 c=4 Ipulse=0 Ihold=-12
 par gleak=6.8 eleak=-55
 done 

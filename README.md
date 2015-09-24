@@ -1,5 +1,7 @@
 ### Drosophila 3rd instar larval aCC motoneuron
 
+**Note:** For previous versions of the models and information about changes, see [Releases](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/releases)
+
 This is the modeling package to accompany the paper:
 
 Cengiz Günay, Fred Sieling, Logesh Dharmar, Wei-Hsiang Lin, Verena Wolfram, Richard Marley, Richard A. Baines, and Astrid A. Prinz. **Distal Spike Initiation Zone Location Estimation by Morphological Simulation of Ionic Current Filtering Demonstrated in a Novel Model of an Identified Drosophila Motoneuron**,
@@ -14,13 +16,15 @@ https://senselab.med.yale.edu/modeldb/ShowModel.asp?model=152028
 Download from:
 http://www.biology.emory.edu/research/Prinz/Cengiz/Gunay_etal_2014.zip
 
-Single compartmental, ball-and-stick models implemented in XPP and full morphological model in Neuron. Paper is in preparation and correlates anatomical properties with electrophysiological recordings from these hard-to-access neurons. For instance we make predictions about location of the spike initiation zone, channel distributions, and synaptic input parameters.
+Single compartmental, ball-and-stick models implemented in XPP and full morphological model in Neuron. Paper correlates anatomical properties with electrophysiological recordings from these hard-to-access neurons. For instance we make predictions about location of the spike initiation zone, channel distributions, and synaptic input parameters.
 
 ## Requirements:
 
 XPPAUT 5.99 - http://www.math.pitt.edu/~bard/xpp/xpp.html
 
 Neuron 7.1 - http://www.neuron.yale.edu/neuron/
+
+jNeuroML - https://github.com/NeuroML/jNeuroML
 
 ## Directories:
 
@@ -39,6 +43,4 @@ Neuron 7.1 - http://www.neuron.yale.edu/neuron/
 
 Please report problems/suggestions/comments to: 
 
-Cengiz Gunay (cengique AT users.sf.net) 
-
-Updated - 2014/05/09
+Cengiz Gunay (cengique AT users.sf.net)
