@@ -31,13 +31,13 @@
 
         <OutputFile fileName="isopotential_NeuroML2.dat">
             <OutputColumn id="v" quantity="pop[0]/v" />
-            <OutputColumn id="mKs" quantity="pop[0]/Ks/ionChannel/mKs/q" />
+            <!-- <OutputColumn id="mKs" quantity="pop[0]/Ks/ionChannel/mKs/q" />
             <OutputColumn id="mKf" quantity="pop[0]/Kf/ionChannel/mKf/q" />
             <OutputColumn id="hKf" quantity="pop[0]/Kf/ionChannel/hKf_hKf2/q1" />
             <OutputColumn id="hKf2" quantity="pop[0]/Kf/ionChannel/hKf_hKf2/q2" />
             <OutputColumn id="mNa" quantity="pop[0]/Na/ionChannel/mNa/q" />
             <OutputColumn id="hNa" quantity="pop[0]/Na/ionChannel/hNa/q" />
-            <OutputColumn id="mNaP" quantity="pop[0]/NaP/ionChannel/mNaP/q" />
+            <OutputColumn id="mNaP" quantity="pop[0]/NaP/ionChannel/mNaP/q" /> -->
         </OutputFile>
 
     </Simulation>

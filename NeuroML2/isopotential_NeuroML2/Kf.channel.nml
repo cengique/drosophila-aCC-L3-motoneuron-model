@@ -29,30 +29,27 @@
     </ionChannelHH>
 
 
-    <ComponentType name="gateHHtauInfTwoParts" extends="gateHHtauInf">
-        <Parameter name="ratioFirstPart" dimension="none" />
 
-        <!-- <Child name="firstPart" type="baseGate" /> -->
-        <!-- <Child name="secondPart" type="baseGate" /> -->
+    <ComponentType name="gateHHtauInfTwoParts" 
+            extends="gateHHtauInf"
+            description="Hodgkin Huxley gate with a second gating variable that depends on the first gating variable">
+        <Parameter name="ratioFirstPart" dimension="none" />
 
         <Child name="timeCourse2" type="baseVoltageDepTime" />
         <Child name="steadyState2" type="baseVoltageDepVariable" />
-        <Child name="q10Settings2" type="baseQ10Settings" />
+        <Children name="q10Settings2" type="baseQ10Settings"/>
 
         <Exposure name="q1" dimension="none" />
         <Exposure name="q2" dimension="none" />
-        
-
 
         <Dynamics>
 
-            <!-- TODO: Fix the select/value field here -->
-            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" value="1" reduce="multiply" required="false"/>
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" select="q10Settings[*]/q10" reduce="multiply" />
             <DerivedVariable name="inf" dimension="none" exposure="inf" select="steadyState/x"/>
             <DerivedVariable name="tauUnscaled" dimension="time" select="timeCourse/t"/>
             <DerivedVariable name="tau" dimension="time" exposure="tau" value="tauUnscaled / rateScale"/>
 
-            <DerivedVariable name="rateScale2" dimension="none" value="1" reduce="multiply" required="false"/>
+            <DerivedVariable name="rateScale2" dimension="none" select="q10Settings2[*]/q10" reduce="multiply" />
             <DerivedVariable name="inf2" dimension="none" select="steadyState2/x"/>
             <DerivedVariable name="tauUnscaled2" dimension="time" select="timeCourse2/t"/>
             <DerivedVariable name="tau2" dimension="time" value="tauUnscaled2 / rateScale2"/>
@@ -73,6 +70,6 @@
 
         </Dynamics>
     </ComponentType>
-    
+
 
 </neuroml>

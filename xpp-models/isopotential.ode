@@ -68,7 +68,7 @@ global 1 t-510 {I=Ihold}
 # initial gate values from respective inf values at initial V
 init V=-54.56137733296305, MKS=0.10958410153422569, MKF=0.0061144119486309977, HKF=0.83111678624803209, HKF2=0.99900082893646969, MNA=0.054660015811734484, HNA=0.91740767131784051, MNAP=0.17168333245095557
 
-@ total=530,bounds=10000000000,meth=euler,dt=.001, nout=1, maxstor=10000000  
+@ total=530,bounds=10000000000,meth=euler,dt=.001, nout=100, maxstor=10000000  
 
 par I=-12 c=4 Ipulse=0 Ihold=-12
 par gleak=6.8 eleak=-55
