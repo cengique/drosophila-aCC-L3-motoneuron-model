@@ -25,7 +25,7 @@ aux Iks=Iks
 #fast K with 2 inactivation time constants
 dmKf/dt=(minfKf(V)-mKf)/mtauKf(V)  
 dhKf/dt=(hinfK(V)-hKf)/htauK(V)  
-dhKf2/dt=(hinfK2(V)-hKf)/116  
+dhKf2/dt=(hinfK2(V)-hKf2)/116  
 Ikf=gKf*mKf^4*(fh*hKf + (1-fh)*hKf2)*(V-EK)  
 par gKf=24.1
 par fh=.95
