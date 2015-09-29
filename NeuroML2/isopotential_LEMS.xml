@@ -69,7 +69,7 @@
 			<TimeDerivative variable="hKf" value="(hinfK-hKf)/htauK" />
 			<StateVariable name="hKf2" dimension="none" />
 			<!-- TODO: Should the 116 in the ode-file be refactored as htauKf2? -->
-			<TimeDerivative variable="hKf2" value="(hinfK2-hKf)/(116 * in_ms)" />
+			<TimeDerivative variable="hKf2" value="(hinfK2-hKf2)/(116 * in_ms)" />
 			<DerivedVariable name="Ikf" dimension="current" value="gKf*mKf^4*(fh*hKf + (1-fh)*hKf2)*(V-EK)" exposure="Ikf" />
 			<DerivedVariable name="minfKf" dimension="none" value="1/(1+exp((V+17.55*in_mV)/(-7.27*in_mV)))" />
 			<DerivedVariable name="mtauKf" dimension="time" value="(1.94+2.66/(1+exp((V-8.12*in_mV)/(7.96*in_mV)))) * in_ms" />
