@@ -59,8 +59,7 @@ minfNap(V) = 1/(1+exp((V+48.77)/(-3.68)))
 mtauNap(V) = 1
 aux Inap=Inap
 
-# TODO: Setting I at start does not work as expected; hence, this line is currently commented out and I is manually set to -12 at start (see below). See also issue #7.
-#global 1 t {I=Ihold}    
+# I is set to -12 (=Ihold) initially, see below   
 global 1 t-10 {I=Ipulse}  
 global 1 t-510 {I=Ihold}  
 
