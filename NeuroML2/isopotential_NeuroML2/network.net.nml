@@ -8,11 +8,13 @@
 	<Include file="isopotential.cell.nml" />
 
 	<pulseGenerator id="pulseGenStart" delay="0ms" duration="10ms" amplitude="-12pA" />
+    <pulseGenerator id="pulseGenBetween" delay="10ms" duration="500ms" amplitude="0pA" />
     <pulseGenerator id="pulseGenEnd" delay="510ms" duration="20ms" amplitude="-12pA" />
 
     <network id="network">
     	<population id="pop" component="isopotential" size="1" />
     	<explicitInput target="pop[0]" input="pulseGenStart" destination="synapses" />
+        <explicitInput target="pop[0]" input="pulseGenBetween" destination="synapses" />
         <explicitInput target="pop[0]" input="pulseGenEnd" destination="synapses" />
     </network>
 
