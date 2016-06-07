@@ -14,6 +14,9 @@ ModelDB accession number is: 152028
 https://senselab.med.yale.edu/modeldb/ShowModel.asp?model=152028
 
 Download from:
+
+https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/master.zip
+OR
 http://www.biology.emory.edu/research/Prinz/Cengiz/Gunay_etal_2014.zip
 
 Single compartmental, ball-and-stick models implemented in XPP and full morphological model in Neuron. Paper correlates anatomical properties with electrophysiological recordings from these hard-to-access neurons. For instance we make predictions about location of the spike initiation zone, channel distributions, and synaptic input parameters.
