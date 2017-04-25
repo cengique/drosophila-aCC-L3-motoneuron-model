@@ -31,11 +31,11 @@ jNeuroML - https://github.com/NeuroML/jNeuroML
 
 ## Directories:
 
-**xpp-models/**	Isopotential and ball-and-stick models.
+**[xpp-models/](xpp-models/)**	Isopotential and ball-and-stick models.
 
-**neuron-model/** Multicompartmental model in Neuron. Use exp-axon-tail2-chans-ext-axon-70um.ses as the main file.
+**[neuron-model/](neuron-model/)** Multicompartmental model in Neuron. Use exp-axon-tail2-chans-ext-axon-70um.ses as the main file.
 
-**NeuroML2/** (*Under Construction*) Ports of all models to NeuroML2 and LEMS. Includes [OMV tests](https://github.com/OpenSourceBrain/osb-model-validation) to check for consistency with the original models: [![Build Status](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model.svg)](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model)
+**[NeuroML2/](NeuroML2/)** (*Under Construction*) Ports of all models to NeuroML2 and LEMS. Includes [OMV tests](https://github.com/OpenSourceBrain/osb-model-validation) to check for consistency with the original models: [![Build Status](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model.svg)](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model)
 
 ## Workflow/history of project:
 - Channel data were fit with the Neurofit tool and then re-adjusted with param-fitter in Matlab.
