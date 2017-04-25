@@ -12,3 +12,4 @@ Run the simulation with:
 - In Windows, right click on `exp-axon-tail2-chans-ext-axon-70um.ses` and open it with Neuron.
 
 Once Neuron loads, click on `Init & Run` on the control window to run a sample simulation. The `IClamp` point process parameters can be adjusted to change input current injected to the soma.
+(Default 3D model window.jpeg)
