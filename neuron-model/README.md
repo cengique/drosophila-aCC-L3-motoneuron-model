@@ -13,4 +13,4 @@ Run the simulation with:
 
 Once Neuron loads, click on `Init & Run` on the control window to run a sample simulation. The `IClamp` point process parameters can be adjusted to change input current injected to the soma.
 
-![Model](Default 3D model window.JPG)
+![Model](Default 3D model window.jpg)
