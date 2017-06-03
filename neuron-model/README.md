@@ -37,7 +37,11 @@ You should left-click with the mouse over the word _**Show**_. Unlike most progr
 
 ![IClamp Window](IClamp-Parameters-Window.JPG)
 
-These variables are the parameters of the Current clamp that is in the 3D model. If you return to the graph in the paper, you will notice that the values of the injected currents are recorded above the graph, with the color of the number corresponding to the line of the same color. These numbers represent 
+These variables are the parameters of the Current clamp that is in the 3D model. If you return to the graph in the paper, you will notice that the values of the injected currents are recorded above the graph, with the color of the number corresponding to the line of the same color.
+
+![Figure2 with circle](Figure2-DataTable-Circle)
+
+In order to change the current in Neuron, the value of the variable amp(nA) must be changed. One thing that must be noticed is that the units
 
 
 
