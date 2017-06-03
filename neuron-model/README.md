@@ -28,3 +28,5 @@ Once Neuron loads, click on `Init & Run` on the control window to run a sample s
 Now draw your attention to the window with the 3D model.
 
 ![Model](Default-model.jpg)
+
+You should left-click with the mouse over the words _**SelectPointProcess**_
