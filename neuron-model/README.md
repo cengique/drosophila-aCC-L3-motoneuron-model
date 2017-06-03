@@ -19,8 +19,12 @@ Once Neuron loads, click on `Init & Run` on the control window to run a sample s
   
   Once the provided model is open there shall be several windows open on the computer, and althougth not mandatory,rearranging the windows is recommended for the sake of efficiency. At the very least the two graphs the RunControl window, and the 3D model window of the neuron should be visible; the other windows can be minimized.
 
+![RunControl](Default-RunControl-Window.JPG)
+![Model](Default-model.jpg)
+
 ![Graph 1](Default-Graph-1-window.JPG)
 ![Graph 2](Default-Graph-2-Window.JPG)
 
-![RunControl](Default-RunControl-Window.JPG)
+Now draw your attention to the window with the 3D model.
+
 ![Model](Default-model.jpg)
