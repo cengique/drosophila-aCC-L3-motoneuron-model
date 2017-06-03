@@ -29,4 +29,6 @@ Now draw your attention to the window with the 3D model.
 
 ![Model](Default-model.jpg)
 
-You should left-click with the mouse over the words _**SelectPointProcess**_
+You should left-click with the mouse over the words _**SelectPointProcess**_. Unlike most programs now, in order to get the desired effect, the button must be held over the wrods rather than just clicked once. With this a small manu comes down, and while still holding the mouse's left button, the mouse should be moved over the words _**IClamp**_. The left button should then be released; when this is done, the window should change, and in the place of the 3D model should be a window with a column of variables and values.
+
+
