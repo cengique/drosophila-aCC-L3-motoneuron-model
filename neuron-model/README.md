@@ -16,6 +16,7 @@ Once Neuron loads, click on `Init & Run` on the control window to run a sample s
  TUTORIAL
  ==========================
    An important part of this tutorial is the paper titled [Distal Spike Initiation Zone Estimation](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004189#pcbi-1004189-g0020), as the point of this tutorial will be to recreate a graph shown in this paper labeled Figure 2 Part A i.
+  
   Once the provided model is open there shall be several windows open on the computer, and althougth not mandatory,rearranging the windows is recommended for the sake of efficiency. At the very least the two graphs the RunControl window, and the 3D model window of the neuron should be visible; the other windows can be minimized.
 
 ![RunControl](Default-RunControl-Window.JPG)
