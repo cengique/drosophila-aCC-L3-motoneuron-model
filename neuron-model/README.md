@@ -15,5 +15,5 @@ Once Neuron loads, click on `Init & Run` on the control window to run a sample s
 
  TUTORIAL
  ==========================
- 
+ An important part of this tutorial is the paper titled [Distal Spike Initiation Zone Estimation](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004189#pcbi-1004189-g0020)
 ![Model](Default-model.jpg)
