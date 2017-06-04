@@ -41,7 +41,7 @@ These variables are the parameters of the Current clamp that is in the 3D model.
 
 ![Figure2 with circle](Figure2-DataTable-Circle.JPG)
 
-In order to change the current in Neuron, the value of the variable amp(nA) must be changed. One thing that must be noticed is that the units
+In order to change the current in Neuron, the value of the variable amp(nA) must be changed. One thing that must be noticed is that the units used in the paper are pA while Neuron 7.4 usese
 
 
 
