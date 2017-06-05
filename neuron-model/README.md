@@ -43,7 +43,7 @@ These variables are the parameters of the Current clamp that is in the 3D model.
 
 In order to change the current in Neuron, the value of the variable amp(nA) must be changed. One thing that must be noticed is that the units used in the paper are pA while Neuron 7.4 uses the units nA. The p is the abbreviation of the units Pico and the n is the abbreviation of the unit Nano, and in order to convert to units, Nano has to be multiplied by 10^3, and to convert in the opposite direction Pico should be multiplied by 10^-3. When you look in the window with the variables , you will see that nA has already been set to 0.05, and based on the rule of conversion 0.05 nA equals 50 pA which is the top value on the data table. In order to create this graph, you simply need to click the _**Init & Run**_ button in the _**RunControl**_ window.
 
-
+![Run & Init Button](Init&Run-Button-better.JPG)
 
 
 
