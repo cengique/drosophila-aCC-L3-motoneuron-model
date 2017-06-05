@@ -47,6 +47,6 @@ In order to change the current in Neuron, the value of the variable amp(nA) must
 
 When this is done there should be lines in graph windows 1 and 2, for this tutorial we will be focusing on _**Graph Window 1**_.
 
-![Graph 2]
+![Graph 2](GraphWindow-2-0.05.JPG)
 
 
