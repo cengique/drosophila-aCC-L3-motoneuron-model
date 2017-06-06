@@ -49,5 +49,4 @@ When this is done there should be lines in graph windows 1 and 2, for this tutor
 
 ![Graph 2](GraphWindow-2-0.05.JPG)
 
-Because we will be adding more lines to the graph we need to make sure that when a new line is drawn the old ones stay there
-
+Because we will be adding more lines to the graph we need to make sure that when a new line is drawn the old ones stay there. TO do this you need to click on the graph and hold down the right button of the mouse, at which timea menu should appear.
