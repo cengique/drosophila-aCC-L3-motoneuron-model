@@ -52,3 +52,10 @@ When this is done there should be lines in graph windows 1 and 2, for this tutor
 Because we will be adding more lines to the graph we need to make sure that when a new line is drawn the old ones stay there. TO do this you need to click on the graph and hold down the right button of the mouse, at which timea menu should appear.
 
 ![Graph with Window](Graph2-littlewindow.JPG)
+
+Do not let go of the button until the cursor is over the _**Keep Lines**_ option. When you let go, Neuron will know from now on to keep all lines created.
+
+TO now create the 30 pA graph, you need to go back to the model parameters window and change the nA from 0.05 to 0.03 and click enter, then hit _**Init & Run**_ button in the _**RunControl**_ window.
+
+
+
