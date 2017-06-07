@@ -56,6 +56,7 @@ Because we will be adding more lines to the graph we need to make sure that when
 Do not let go of the button until the cursor is over the _**Keep Lines**_ option. When you let go, Neuron will know from now on to keep all lines created.
 
 TO now create the 30 pA graph, you need to go back to the model parameters window and change the nA from 0.05 to 0.03 and click enter, then hit _**Init & Run**_ button in the _**RunControl**_ window.
+![Graph 0.05 and 0.03](Graph2-0.05-0.03.JPG)
 
 
 
