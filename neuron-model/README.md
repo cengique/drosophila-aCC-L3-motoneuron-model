@@ -58,5 +58,7 @@ Do not let go of the button until the cursor is over the _**Keep Lines**_ option
 TO now create the 30 pA graph, you need to go back to the model parameters window and change the nA from 0.05 to 0.03 and click enter, then hit _**Init & Run**_ button in the _**RunControl**_ window.
 ![Graph 0.05 and 0.03](Graph2-0.05-0.03.JPG)
 
+Finally, repeat the last step, but this time change the nA to 0.01 which is equal to 10 pA.
 
+You final product should have all three lines in one graph.
 
