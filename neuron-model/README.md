@@ -62,3 +62,4 @@ Finally, repeat the last step, but this time change the nA to 0.01 which is equa
 
 You final product should have all three lines in one graph.
 
+1[Final Product](GraphWindow2-FinalProduct.JPG)
