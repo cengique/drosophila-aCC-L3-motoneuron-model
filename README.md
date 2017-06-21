@@ -31,11 +31,16 @@ jNeuroML - https://github.com/NeuroML/jNeuroML
 
 ## Directories:
 
-**[xpp-models/](xpp-models/)**	Isopotential and ball-and-stick models.
+**[xpp-models/](xpp-models/)**	Isopotential and ball-and-stick models using the XPPAUT simulator.
 
-**[neuron-model/](neuron-model/)** Multicompartmental model in Neuron. Use exp-axon-tail2-chans-ext-axon-70um.ses as the main file.
+**[neuron-model/](neuron-model/)** Multicompartmental model using the Neuron simulator. Follow tutorial in the README to get started with model and replicate paper figures.
 
-**[NeuroML2/](NeuroML2/)** (*Under Construction*) Ports of all models to NeuroML2 and LEMS. Includes [OMV tests](https://github.com/OpenSourceBrain/osb-model-validation) to check for consistency with the original models: [![Build Status](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model.svg)](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model)
+**[NeuroML2/](NeuroML2/)** Ports of all models to NeuroML2 and LEMS. Includes [OMV tests](https://github.com/OpenSourceBrain/osb-model-validation) to check for consistency with the original models: [![Build Status](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model.svg)](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model)
+
+## Credits:
+- 2010-2015: Models constructed by [Cengiz Gunay](https://github.com/cengique) in the lab of [Astrid Prinz](http://www.biology.emory.edu/index.cfm?faculty=39) with help from Logesh Dharmar and Fred Sieling.
+- 2015-2016: NeuroML2 and LEMS translation by [Johannes Rieke](https://github.com/jrieke) (see [thesis project](https://github.com/jrieke/drosophila-dynamics) that analyzes this model).
+- Jan-June 2017: Neuron tutorial by [Musa Drammeh](https://github.com/Antacart).
 
 ## Workflow/history of project:
 - Channel data were fit with the Neurofit tool and then re-adjusted with param-fitter in Matlab.
