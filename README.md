@@ -33,14 +33,17 @@ jNeuroML - https://github.com/NeuroML/jNeuroML
 
 **[xpp-models/](xpp-models/)**	Isopotential and ball-and-stick models using the XPPAUT simulator.
 
-**[neuron-model/](neuron-model/)** Multicompartmental model using the Neuron simulator. Follow tutorial in the README to get started with model and replicate paper figures.
+**[neuron-model/](neuron-model/)** Multicompartmental model using the Neuron simulator.
+Follow the tutorial in the [tutorial-replicate-paper-figure/](neuron-model/tutorial-replicate-paper-figure/) subdirectory README to get started with the model and replicate paper figures.
+You can also use python to work with the model in [tutorial-python-neuron](neuron-model/tutorial-python-neuron/)
 
-**[NeuroML2/](NeuroML2/)** Ports of all models to NeuroML2 and LEMS. Includes [OMV tests](https://github.com/OpenSourceBrain/osb-model-validation) to check for consistency with the original models: [![Build Status](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model.svg)](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model)
+**[NeuroML2/](NeuroML2/)** Ports of all models to NeuroML2 and LEMS. Includes [OMV tests](https://github.com/OpenSourceBrain/osb-model-validation) to check for consistency with the original models: [![Build Status](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model.svg)](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model).
 
 ## Credits:
 - 2010-2015: Models constructed by [Cengiz Gunay](https://github.com/cengique) in the lab of [Astrid Prinz](http://www.biology.emory.edu/index.cfm?faculty=39) with help from Logesh Dharmar and Fred Sieling.
 - 2015-2016: NeuroML2 and LEMS translation by [Johannes Rieke](https://github.com/jrieke) (see [thesis project](https://github.com/jrieke/drosophila-dynamics) that analyzes this model).
 - Jan-June 2017: Neuron tutorial by [Musa Drammeh](https://github.com/Antacart).
+- Dec 2017 : Python with Neuron tutorial by [Reuben Massaquoi](https://github.com/reubmassaquoi)
 
 ## Workflow/history of project:
 - Channel data were fit with the Neurofit tool and then re-adjusted with param-fitter in Matlab.
