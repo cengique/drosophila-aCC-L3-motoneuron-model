@@ -68,7 +68,7 @@ Simply load the `voltage_recording.txt` file in matlab and type the following li
 `a_trace = trace('voltage_recording.txt', 25e-6, 1e-3,'my_trace',struct('file_type','neuron')); plot(a_trace)`
  
 
-![Voltage Plot](voltage_trace_plot.jpg)
+![Voltage Plot](voltage_trace_plot.png)
 
 
 
