@@ -1,18 +1,3 @@
-### Morphologically reconstructed model using the Neuron simulator
-
-Prerequisites:
-
-1. Download these files ([latest version](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/master.zip) 
-or the [1.0 stable release](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/v1.0.zip))
-1. Install [NEURON 7.1 or later](http://www.neuron.yale.edu/neuron/)
-
-Run the simulation with:
-
-- In Linux or Mac OS X, on the command line type ```nrngui exp-axon-tail2-chans-ext-axon-70um.ses``` 
-- In Windows, right click on `exp-axon-tail2-chans-ext-axon-70um.ses` and open it with Neuron. `C:\nrn\bin\neuron`
-
-Once Neuron loads, click on `Init & Run` on the control window to run a sample simulation. The `IClamp` point process parameters can be adjusted to change input current injected to the soma.
-
  TUTORIAL
  ==========================
    An important part of this tutorial is the paper titled [Distal Spike Initiation Zone Estimation](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004189#pcbi-1004189-g0020), as the point of this tutorial will be to recreate a graph shown in this paper labeled Figure 2 Part A i. The lines of the graph represent the data output, when the researchers changed the current being injected into the model by the simulated IClamp. This data would become more important later in the overall experiment as they used it as a reference point in comparing different neuron models.
