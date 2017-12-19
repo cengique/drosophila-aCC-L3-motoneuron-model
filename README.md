@@ -35,7 +35,7 @@ jNeuroML - https://github.com/NeuroML/jNeuroML
 
 **[neuron-model/](neuron-model/)** Multicompartmental model using the Neuron simulator.
 Follow the tutorial in the [tutorial-replicate-paper-figure/](neuron-model/tutorial-replicate-paper-figure/) subdirectory README to get started with the model and replicate paper figures.
-You can also use python to work with the model in [tutorial-python-neuron](neuron-model/tutorial-python-neuron/)
+You can also use Python to work with the model in [tutorial-python-neuron](neuron-model/tutorial-python-neuron/).
 
 **[NeuroML2/](NeuroML2/)** Ports of all models to NeuroML2 and LEMS. Includes [OMV tests](https://github.com/OpenSourceBrain/osb-model-validation) to check for consistency with the original models: [![Build Status](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model.svg)](https://travis-ci.org/cengique/drosophila-aCC-L3-motoneuron-model).
 
