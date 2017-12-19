@@ -15,5 +15,5 @@ Once Neuron loads, click on `Init & Run` on the control window to run a sample s
 
  ##### Tutorials
 
-- [Replicate Paper Figures](tutorial-replicate-paper-figure\README.md)
-- [Python with Neuron](\tutorial-python-neuron\README.md)
+- [Replicate Paper Figures](tutorial-replicate-paper-figure/README.md)
+- [Python with Neuron](tutorial-python-neuron/README.md)
