@@ -63,7 +63,7 @@ if n ==1:
  
  First, you will need the [Pandora ToolBox](https://github.com/cengique/pandora-matlab)
  
-Simply load the `voltage_recording.txt` file in matlab and type the following line:
+Then, place the `voltage_recording.txt` in the current MATLAB directory. Nexy, to load the `voltage_recording.txt` file in MATLAB by typing in the following command:
 
 `a_trace = trace('voltage_recording.txt', 25e-6, 1e-3,'my_trace',struct('file_type','neuron')); plot(a_trace)`
  
