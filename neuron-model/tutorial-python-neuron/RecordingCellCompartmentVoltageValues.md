@@ -43,12 +43,12 @@ Now that the preliminary steps have been taken, we can now run our simulation wi
 h.finitialize()  #Must be called before run().
 h.run()  #Run simulation.
 ```
-Once our simulation ends wecan view our values in a software like matlab. But first, we have to write our data to a text file called `voltage_recording.txt` In order to do that, using the following lines:
+Once our simulation ends wecan view our values in a software like matlab. But first, we have to write our data to a data file called `voltage_recording.dat` In order to do that, using the following lines:
 
 
 ```python
 h('strdef my_file')
-h('my_file = "voltage_recording.txt"')
+h('my_file = "voltage_recording.dat"')
 h('objref save')
 h('save = new File(my_file)')
 h.save.wopen()
@@ -63,9 +63,9 @@ if n ==1:
  
  First, you will need the [Pandora ToolBox](https://github.com/cengique/pandora-matlab)
  
-Simply load the `voltage_recording.txt` file in matlab and type the following line:
+Place the `voltage_recording.dat` in the current MATLAB directory. Next, to load the `voltage_recording.dat` file in MATLAB, type in the following command in the MATLAB prompt:
 
-`a_trace = trace('voltage_recording.txt', 25e-6, 1e-3,'my_trace',struct('file_type','neuron')); plot(a_trace)`
+`a_trace = trace('voltage_recording.dat', 25e-6, 1e-3,'my_trace',struct('file_type','neuron')); plot(a_trace)`
  
 
 ![Voltage Plot](voltage_trace_plot.png)
