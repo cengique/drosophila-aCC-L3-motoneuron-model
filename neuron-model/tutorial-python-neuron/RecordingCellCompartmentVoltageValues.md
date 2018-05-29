@@ -13,6 +13,13 @@ In order to use the Neuron module, we are going to import an important variable 
 
 The `h` variable will be our HocObject. It allows python to interface with hoc. ([Using the h variable](https://www.neuron.yale.edu/neuron/static/py_doc/programming/python.html#python-accessing-hoc) )
 
+It is important to note that all of these commands are executed in python script. If you would like to view the NEURON's interface, type the following command into a python script:
+
+`from neuorn import gui`
+
+Next, click the RUN tab, followed by Run Module to launch the NEURON interface.
+
+
 After importing our HocObject we then need to load important files in hoc using the following lines of code:
 
 ```python
