@@ -10,6 +10,9 @@ The following tutorial can either be completed entering one line of code at a ti
 
 To use  IDLE, first launch the Anaconda prompt. Once a black command window appears, type 'idle' followed by the ENTER key. This should launch IDLE. If you wish to make an entire script of the commands below, click FILE, then NEW FILE to open a blank Python file to write the commands in.  
 
+## Running Scripts (all commands at once)
+If you chose this option, it is important to note that when you are ready to run the code you have, to click the RUN tab, followed by Run Module(f5).
+
 
 Next, we are going to be running a neuron simulation that will be recording voltage values from the cell compartments. 
 
@@ -21,7 +24,6 @@ from neuron import h, gui #gui is optional
 The `h` variable allows python to interface with hoc. ([Using the h variable](https://www.neuron.yale.edu/neuron/static/py_doc/programming/python.html#python-accessing-hoc) )
 
 
-Next, click the RUN tab, followed by Run Module to launch the NEURON interface.
 
 
 After importing our HocObject we then need to load important files in hoc using the following lines of code:
