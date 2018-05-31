@@ -2,20 +2,24 @@
 
 
 
-We wil be using the neuron module with python. See [here](README.md) for getting setup.
+We wil be using the neuron module with python. See [here](README.md) for getting setup. Continuing further with tutorial assumes that you have already installed: Python, Anaconda, & NEURON.
+
+The following tutorial can either be completed entering one line of code at a time, or by typing in ALL of the following commands into a Python script and have them all run at once. Either way, the Python shell must be launched. 
+
+## Launching IDLE (Python Shell)
+
+To use  IDLE, first launch the Anaconda prompt. Once a black command window appears, type 'idle' followed by the ENTER key. This should launch IDLE. If you wish to make an entire script of the commands below, click FILE, then NEW FILE to open a blank Python file to write the commands in.  
 
 
-We are going to be running a neuron simulation in python and we will be recording voltage values from the cell compartments. 
+Next, we are going to be running a neuron simulation that will be recording voltage values from the cell compartments. 
 
-In order to use the Neuron module, we are going to import an important variable using the following line:
+In order to use the Neuron module, we will need to import a HocObject (h) and have the option of also importing NEURONS interface (gui) by using the following line:
 
-`from neuron import h`
+```
+from neuron import h, gui #gui is optional 
+```
+The `h` variable allows python to interface with hoc. ([Using the h variable](https://www.neuron.yale.edu/neuron/static/py_doc/programming/python.html#python-accessing-hoc) )
 
-The `h` variable will be our HocObject. It allows python to interface with hoc. ([Using the h variable](https://www.neuron.yale.edu/neuron/static/py_doc/programming/python.html#python-accessing-hoc) )
-
-It is important to note that all of these commands are executed in python script. If you would like to view the NEURON's interface, type the following command into a python script:
-
-`from neuorn import gui`
 
 Next, click the RUN tab, followed by Run Module to launch the NEURON interface.
 
@@ -49,6 +53,7 @@ Now that the preliminary steps have been taken, we can now run our simulation wi
 ```python
 h.finitialize()  #Must be called before run().
 h.run()  #Run simulation.
+h('vec.plot(g, .1)') #this will show the graph in NEURON
 ```
 Once our simulation ends wecan view our values in a software like matlab. But first, we have to write our data to a data file called `voltage_recording.dat` In order to do that, using the following lines:
 
