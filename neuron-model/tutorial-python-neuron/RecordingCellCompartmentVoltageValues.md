@@ -2,7 +2,7 @@
 
 
 
-We wil be using the neuron module with python. See [here](README.md) for getting setup. Continuing further with tutorial assumes that you have already installed: Python, Anaconda, & NEURON.
+We wil be using the neuron module with python. See [here](README.md) for getting setup. Continuing further with the tutorial assumes that you have already installed: Python, Anaconda, & NEURON.
 
 The following tutorial can either be completed entering one line of code at a time, or by typing in ALL of the following commands into a Python script and have them all run at once. Either way, the Python shell must be launched. 
 
@@ -13,7 +13,7 @@ To use  IDLE, first launch the Anaconda prompt. Once a black command window appe
 
 Next, we are going to be running a neuron simulation that will be recording voltage values from the cell compartments. 
 
-In order to use the Neuron module, we will need to import a HocObject (h) and have the option of also importing NEURONS interface (gui) by using the following line:
+In order to use the Neuron module, we will need to import a HocObject (h) and also have the option of also importing NEURONS interface (gui) by using the following line:
 
 ```
 from neuron import h, gui #gui is optional 
@@ -55,7 +55,7 @@ h.finitialize()  #Must be called before run().
 h.run()  #Run simulation.
 h('vec.plot(g, .1)') #this will show the graph in NEURON
 ```
-Once our simulation ends wecan view our values in a software like matlab. But first, we have to write our data to a data file called `voltage_recording.dat` In order to do that, using the following lines:
+Once our simulation ends wecan view our values in a software like matlab. But first, we have to write our data to a data file called `voltage_recording.dat` In order to do that, type the following lines:
 
 
 ```python
@@ -75,7 +75,9 @@ if n ==1:
  
  First, you will need the [Pandora ToolBox](https://github.com/cengique/pandora-matlab)
  
-Place the `voltage_recording.dat` in the current MATLAB directory. Next, to load the `voltage_recording.dat` file in MATLAB, type in the following command in the MATLAB prompt:
+After matlab is launched, the `voltage_recording.dat` file needs to be added to the MATLAB path. To do this, click SET PATH at the top right section of MATLAB under the Environment section. Next, click ADD FOLDER and find the folder that contains the data file. Select the folder and press enter.
+
+Lastly, we need to load the `voltage_recording.dat` file in MATLAB by typing in the following command in the MATLAB prompt:
 
 `a_trace = trace('voltage_recording.dat', 25e-6, 1e-3,'my_trace',struct('file_type','neuron')); plot(a_trace)`
  
