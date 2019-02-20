@@ -44,6 +44,7 @@ You can also use Python to work with the model in [tutorial-python-neuron](neuro
 - 2015-2016: NeuroML2 and LEMS translation by [Johannes Rieke](https://github.com/jrieke) (see [thesis project](https://github.com/jrieke/drosophila-dynamics) that analyzes this model).
 - Jan-June 2017: Neuron tutorial by [Musa Drammeh](https://github.com/Antacart).
 - Dec 2017 : Python with Neuron tutorial by [Reuben Massaquoi](https://github.com/reubmassaquoi)
+- June 2018 : Updates to Python tutorial by [Alex McWhorter](https://github.com/amcwhor1)
 
 ## Workflow/history of project:
 - Channel data were fit with the Neurofit tool and then re-adjusted with param-fitter in Matlab.
