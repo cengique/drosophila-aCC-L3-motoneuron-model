@@ -47,7 +47,7 @@ After importing the HocObject, use the following lines of code to import the nee
 h('load_file("inc-first.ses")')  #load ion channels
 h('{load_file("neuron-CB-ext-axon-2pieces-chans-ext-axon-70um.ses")}')  #load cellbuilder
 h('load_file("fitfuncs.hoc")')  #load common functions
-h('load_file("stats.hoc")')
+h('load_file("stats.hoc")') #loads statistical functions
 ```
 
 The simulation has to run for a certain duration. This tutorial will use 600 milliseconds. Duration can be set in the `h` variables through `tstop`:
@@ -60,7 +60,7 @@ Voltage values will be recorded in a hoc vector. To declare a vector and specify
 
 
 ```python
-h('objref vec') #declares a vector
+h('objref vec') #declares an object variable to hold the data
 h('vec = new Vector()') #initializes the vector
 h('vec.record(&soma[0].v(.5))') #sets the vector for receiving simulation data
 ```
@@ -68,7 +68,7 @@ h('vec.record(&soma[0].v(.5))') #sets the vector for receiving simulation data
 Use the following to set the graph in NEURON to display the simulation data. A new window in NEURON should appear once the graph has been initialized. Note how the axes change when set the presets.
 
 ```python
-h('objref g') #declares a graph
+h('objref g') #declares an object variable to hold the graph
 h('g = new Graph()') #initializes the graph
 h('g.size(0,10,-1,1)') #sets presets for axes of the graph
 ```
@@ -84,16 +84,16 @@ h('vec.plot(g, .1)') #plots the data on the graph
 Once the simulation ends, the data can be saved for later in a `.dat` file. Future tutorials will use MATLAB or tools from Anaconda for viewing the data. The following lines will save the recorded data in a binary file called `voltage_recording.dat`. Hit the Enter key twice for the last line to execute it.
 
 ```python
-h('strdef my_file') #declares a file
-h('my_file = "voltage_recording.dat"') #sets voltage_recording as the target
-h('objref save')
-h('save = new File(my_file)')
-h.save.wopen()
-n = h.vec.vwrite(h.save) #sets n to 1 if the save was successful, 0 if not
+h('strdef my_file') #declares a string variable to hold the file name
+h('my_file = "voltage_recording.dat"') #specifies the file name in the string variable
+h('objref save') #creates a file object to hold the data
+h('save = new File(my_file)') 
+h.save.wopen() #opens the file to be written to
+n = h.vec.vwrite(h.save) #writes the binary data to the file and returns if successful
 if n == 1:
     h.save.close()
 ```
-# _________________________________________________________________
+
 ## Viewing Voltage Values in Matlab with Pandora ToolBox
  
  First, you will need the [Pandora ToolBox](https://github.com/cengique/pandora-matlab)
