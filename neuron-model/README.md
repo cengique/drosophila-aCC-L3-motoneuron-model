@@ -3,7 +3,7 @@
 #### Prerequisites:
 
 1. Download the latest [drosophila-aCC-L3-motoneuron-model](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/master.zip)
-or the [1.0 stable release](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/v1.0.zip)
+or the [1.0 stable release](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/v1.0.zip) and extract the ZIP file to a folder on your computer
 1. Install [NEURON 7.1 or later](http://www.neuron.yale.edu/neuron/)
 
 ### Opening the simulation:
