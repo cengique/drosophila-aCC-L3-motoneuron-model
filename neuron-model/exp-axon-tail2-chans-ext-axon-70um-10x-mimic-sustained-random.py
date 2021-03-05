@@ -75,7 +75,7 @@ def set_syn(*numsyn):
         nc[count].number = 3 + aynrand_num.repick()
         nc[count].start = 10 + aynrand_start.repick() #//+ (i-1)*interval/numsyn 
         nc[count].noise = 0
-        ns[count].weight = .00018 * magepsc
+        ns[count].weight[0] = .00018 * magepsc
         count += 1
       
 '''
@@ -85,6 +85,6 @@ def set_syn(*numsyn):
 '''
 
 set_syn(685, 524, 520, 626, 205, 357, 464, 588, 513, 48)
-h.load('stdrun.hoc')
-h.fintialize(-65 * mV)
+h.load_file('stdrun.hoc')
+h.finitialize(-65 * mV)
 h.continuerun(600 * ms)
