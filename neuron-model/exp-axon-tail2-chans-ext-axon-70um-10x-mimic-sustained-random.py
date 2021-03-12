@@ -59,24 +59,28 @@ aynrand_start.ACG(pc.time())
 aynrand_start.normal(200,1500)
 
 def set_syn(*numsyn):
-    count = 0
-    syn = []
-    ns = []
-    nc = []
+    synl = []
+    nsl = []
+    ncl = []
     
     for i in numsyn:
         print(f"dendrite[{i}]\n")
-        syn.append(h.ExpSyn(h.dendrite[i](0.5)))
-        nc.append(h.NetStim(h.dendrite[i](.5)))
-        ns.append(h.NetCon(nc[count], syn[count]))
-        syn[count].tau = 5
-        syn[count].e = 0
-        nc[count].interval = interval
-        nc[count].number = 3 + aynrand_num.repick()
-        nc[count].start = 10 + aynrand_start.repick() #//+ (i-1)*interval/numsyn 
-        nc[count].noise = 0
-        ns[count].weight[0] = .00018 * magepsc
-        count += 1
+        syn = h.ExpSyn(h.dendrite[i](0.5))
+        ns = h.NetStim(h.dendrite[i](0.5))
+        syn.tau = 5
+        syn.e = 0
+        ns.interval = interval
+        ns.number = 3 + aynrand_num.repick()
+        ns.start = 10 + aynrand_start.repick() #//+ (i-1)*interval/numsyn 
+        ns.noise = 0
+        nc = h.NetCon(ns, syn)
+        nc.weight[0] = .00018 * magepsc
+        synl.append(syn)
+        ncl.append(nc)
+        nsl.append(ns)
+
+    return ncl, nsl, synl
+
       
 '''
  * synapses:
@@ -84,7 +88,7 @@ def set_syn(*numsyn):
  * bot dend: 205, 357, 464, 588, 513, 48
 '''
 
-set_syn(685, 524, 520, 626, 205, 357, 464, 588, 513, 48)
+ncl, nsl, synl = set_syn(685, 524, 520, 626, 205, 357, 464, 588, 513, 48)
 h.load_file('stdrun.hoc')
 h.finitialize(-65 * mV)
 h.continuerun(600 * ms)
