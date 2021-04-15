@@ -45,8 +45,6 @@ h.restoreStateFromFile(state_w_syn)
 h.VClamp[0].dur[0] = 1000
 
 # use ExpSyn object
-magepsc = 20
-interval = 10
 
 aynrand_num = h.Random()
 pc = h.ParallelContext()
@@ -58,37 +56,45 @@ aynrand_start = h.Random()
 aynrand_start.ACG(pc.time())
 aynrand_start.normal(200,1500)
 
-def set_syn(*numsyn):
-    synl = []
-    nsl = []
-    ncl = []
-    
+synl = []
+nsl = []
+ncl = []
+
+def set_syn_objs(*numsyn):
+    """Create synapse, NetStim, and NetCon objects"""
     for i in numsyn:
         print(f"dendrite[{i}]\n")
         syn = h.ExpSyn(h.dendrite[i](0.5))
         ns = h.NetStim(h.dendrite[i](0.5))
-        syn.tau = 5
+        nc = h.NetCon(ns, syn)
+        synl.append(syn)
+        ncl.append(nc)
+        nsl.append(ns)
+
+def set_syn_pars(weight = .00018, tau = 5, interval = 10, magepsc = 20):
+    """Set parameters of existing objects"""
+    print(f"Setting: weight={weight}, tau={tau}, interval={interval}, magepsc={magepsc}")
+    for nc in ncl:
+        syn = nc.syn()
+        ns = nc.pre()
+        syn.tau = tau
         syn.e = 0
         ns.interval = interval
         ns.number = 3 + aynrand_num.repick()
         ns.start = 10 + aynrand_start.repick() #//+ (i-1)*interval/numsyn 
         ns.noise = 0
-        nc = h.NetCon(ns, syn)
-        nc.weight[0] = .00018 * magepsc
-        synl.append(syn)
-        ncl.append(nc)
-        nsl.append(ns)
+        nc.weight[0] = weight * magepsc
 
-    return ncl, nsl, synl
 
-      
 '''
  * synapses:
  * top dend: 685, 524, 520, 626
  * bot dend: 205, 357, 464, 588, 513, 48
 '''
 
-ncl, nsl, synl = set_syn(685, 524, 520, 626, 205, 357, 464, 588, 513, 48)
+set_syn_objs(685, 524, 520, 626, 205, 357, 464, 588, 513, 48)
+set_syn_pars()                  # use defaults
+
 h.load_file('stdrun.hoc')
 h.finitialize(-65 * mV)
 h.continuerun(600 * ms)
