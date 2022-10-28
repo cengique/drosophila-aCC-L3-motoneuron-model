@@ -22,11 +22,12 @@ See below for available experiment files.
 ## Running the simulation
 Once NEURON opens, look for `Init & Run` on the control window to run a sample simulation. The `IClamp` point process parameters can be adjusted to change input current injected to the soma. See under Tutorials for more information.
 
-## Experiment files
+## Available experiment files
 
-- `exp-axon-tail2-chans-ext-axon-70um.ses` - published base model that contains an extended axon containing Na-K spiking channels at 70um distance from its soma
+- `exp-axon-tail2-chans-ext-axon-70um.ses` - published base model that contains an extended axon containing Na-K spiking channels at 70um distance from its soma.
+- `exp-axon-tail2-chans-ext-axon-70um-10x-mimic-sustained-random.py` - an extension of the base model that has 10 predefined synaptic locations to test sustained inputs to mimic spontaneous rhythmic current (SRC) responses.
 
 ## Tutorials
 
 - [Replicate Paper Figures with NEURON](tutorial-replicate-paper-figure/README.md)
-- [Python with Neuron](tutorial-python-neuron/README.md)
+- [Running the Neuron model with Python](tutorial-python-neuron/README.md)
