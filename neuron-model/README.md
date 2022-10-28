@@ -1,25 +1,32 @@
-### Morphologically reconstructed model using the NEURON simulator
+# Morphologically reconstructed model using the NEURON simulator
 
-#### Prerequisites:
+## Prerequisites:
 
 1. Download the latest [drosophila-aCC-L3-motoneuron-model](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/master.zip)
 or the [1.0 stable release](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/v1.0.zip) and extract the ZIP file to a folder on your computer
 1. Install [NEURON 7.1 or later](http://www.neuron.yale.edu/neuron/)
 
-### Opening the simulation:
+## Opening the simulations via experiment SES/PY files:
 
-#### Linux/MacOS
+See below for available experiment files.
+
+### Linux/MacOS
 - In Linux or Mac OS X, navigate to the folder that holds the model ```drosophila-aCC-L3-motoneuron-model-master/neuron-model``` 
-- In the terminal type ```nrngui exp-axon-tail2-chans-ext-axon-70um.ses``` to open the model
+- To open the model, switch to a terminal and type ```nrngui "experiment.ses"``` for a SES file and ```python experiment.py``` for PY file.
 
-#### Windows
-- In Windows, right click on `exp-axon-tail2-chans-ext-axon-70um.ses` and open it with NEURON or
+### Windows
+- In Windows, right click on the SES file and open it with NEURON or
 - If you do not see the option, select `Open with...` and navigate to `C:\nrn\bin\neuron`
+- For PY files, open the command prompt (CMD) and type ```py experiment.py```
 
-### Running the simulation
+## Running the simulation
 Once NEURON opens, look for `Init & Run` on the control window to run a sample simulation. The `IClamp` point process parameters can be adjusted to change input current injected to the soma. See under Tutorials for more information.
 
- #### Tutorials
+## Experiment files
+
+- `exp-axon-tail2-chans-ext-axon-70um.ses` - published base model that contains an extended axon containing Na-K spiking channels at 70um distance from its soma
+
+## Tutorials
 
 - [Replicate Paper Figures with NEURON](tutorial-replicate-paper-figure/README.md)
 - [Python with Neuron](tutorial-python-neuron/README.md)
