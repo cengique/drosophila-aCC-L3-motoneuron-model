@@ -1,0 +1,53 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[7]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin PointProcessManager
+{
+load_file("pointman.hoc")
+}
+{
+electrode ocbox_ = new PointProcessManager(0)
+}
+{object_push(ocbox_)}
+{
+mt.select("VClamp") i = mt.selected()
+ms[i] = new MechanismStandard("VClamp")
+ms[i].set("dur", 500, 0)
+ms[i].set("dur", 0, 1)
+ms[i].set("dur", 0, 2)
+ms[i].set("amp", -60, 0)
+ms[i].set("amp", 0, 1)
+ms[i].set("amp", 0, 2)
+ms[i].set("gain", 100000, 0)
+ms[i].set("rstim", 1, 0)
+ms[i].set("tau1", 0.001, 0)
+ms[i].set("tau2", 0, 0)
+ms[i].set("e0", 0, 0)
+ms[i].set("vo0", 0, 0)
+ms[i].set("vi0", 0, 0)
+ms[i].set("fac", 0, 0)
+mt.select("VClamp") i = mt.selected() maction(i)
+hoc_ac_ = 0.833333
+sec.sec move() d1.flip_to(0)
+}
+{object_pop() doNotify()}
+{
+ocbox_ = ocbox_.v1
+ocbox_.map("PointProcessManager", 4, 343, 318.72, 603.84)
+}
+objref ocbox_
+//End PointProcessManager
+
+{
+save_window_ = new Graph(0)
+save_window_.size(0,600,0,1)
+scene_vector_[6] = save_window_
+{save_window_.view(0, 0, 600, 1, 1342, 270, 528.96, 450.88)}
+graphList[2].append(save_window_)
+save_window_.save_name("graphList[2].")
+save_window_.addvar("VClamp[0].i", 1, 1, 0.8, 0.9, 2)
+}
+objectvar scene_vector_[1]
+{doNotify()}
