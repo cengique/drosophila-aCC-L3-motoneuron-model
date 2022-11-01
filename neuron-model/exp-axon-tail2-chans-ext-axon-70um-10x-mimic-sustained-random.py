@@ -1,7 +1,10 @@
 from neuron import h, gui
 from neuron.units import ms, mV
 # Experiment with 2-component axon extention tail, and Na-K channels
-# in all compartments
+# in all compartments.
+
+# Sets 10 synapses in random locations and stimulates them to mimic
+# SRC events in voltage clamp soma at -60 mV.
 
 # nrngui stuff and ion chans
 
@@ -71,14 +74,14 @@ def set_syn_objs(*numsyn):
         ncl.append(nc)
         nsl.append(ns)
 
-def set_syn_pars(weight = .00018, tau = 5, interval = 10, magepsc = 20):
+def set_syn_pars(weight = .00018, tau = 5, interval = 10, magepsc = 20, syne = 0):
     """Set parameters of existing objects"""
-    print(f"Setting: weight={weight}, tau={tau}, interval={interval}, magepsc={magepsc}")
+    print(f"Setting: weight={weight}, tau={tau}, interval={interval}, magepsc={magepsc}, syne={syne}")
     for nc in ncl:
         syn = nc.syn()
         ns = nc.pre()
         syn.tau = tau
-        syn.e = 0
+        syn.e = syne
         ns.interval = interval
         ns.number = 3 + aynrand_num.repick()
         ns.start = 10 + aynrand_start.repick() #//+ (i-1)*interval/numsyn 

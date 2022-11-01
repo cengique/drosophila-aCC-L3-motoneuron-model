@@ -1,23 +1,114 @@
-# How to setup Python with the NEURON Module
-You should have [NEURON](https://www.neuron.yale.edu/neuron/download) installed before proceeding.
+# Recording Cell Compartment Voltage Values
 
-First install the latest version of Python (3.7 as of 2019) for your system. Installing through [Anaconda](https://www.anaconda.com/distribution/) is recommended.
+This tutorial will cover using the NEURON module with
+Python. See [How to setup Python with the NEURON Module](../README.md)
+for getting setup if you have not already. If you need further
+information than this tutorial will deliver, check Yale's full
+documentation
+of
+[NEURON + Python](https://www.neuron.yale.edu/neuron/static/docs/neuronpython/index.html)
 
-### Windows
-1. Make sure pip has been installed and the correct environment path variables have been set up.
-2. Open the Anaconda Prompt application and enter: `pip install pyneuron`
+### Prerequisities
+* [drosophila-aCC-L3-motoneuron-model](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/master.zip) or the [1.0 stable release](https://github.com/cengique/drosophila-aCC-L3-motoneuron-model/archive/v1.0.zip)
+* [Anaconda](https://www.anaconda.com/distribution/) or Python and its included packages
+* [NEURON 7.1 or later](http://www.neuron.yale.edu/neuron/)
 
-If you encounter any issues, the last known working version of [Python 2.7 32 bit](https://www.python.org/download/releases/2.7/).
-### Linux
-1. Make sure Python and pip are already installed.
-2. To begin entering Python input in the Terminal, enter `nrngui -python`
- ### Testing
- To check if NEURON is properly set up for use with Python:
- 1. Open Anaconda Prompt
- 2. Type in `idle` and press the Enter key
- 3. Enter `from neuron import h`
+The following lines of code may be entered sequentially in the Python shell or all at once through a `.py` script. The script is already inside the motoneuron model at `drosophila-aCC-L3-motoneuron-model-master/drosophila-aCC-L3-motoneuron-model-master/neuron-model/python_hoc.py`
+
+## Launching IDLE (Python Shell)
+IDLE will be the designated environment for inputting Python code. Anaconda and the default installations of Python should already include the program. Be sure to hit the Enter key when you are ready to execute a line.
+
+1. Open Anaconda Prompt
+2. Change Directory to the folder containing our NEURON model using `cd`
+    * Example for Windows, note what may need to be edited:
+    ```
+    cd Downloads/drosophila-aCC-L3-motoneuron-model-master/drosophila-aCC-L3-motoneuron-model-master/neuron-model
+    ```
+3. Enter `idle` to start the Python shell
+4. Switch to the new window to continue with below
+
+## Running Python Code
+### Running an Entire Script
+This option is for experienced programmers. The `python_hoc.py` file will contain brief explanations of what each line of code does. Refer to the next section for a more in-depth explanation. To run the script, do the following:
+1. In the Python shell, select File > Open...
+2. Choose the file `python_hoc.py`
+3. In the new window, run the script with Run > Run Module `F5`
+
+To make a script, select File > New File. In the new window, enter the desired code to run. Once completed, save the `.py` file. The directory of the model is recommended since it contains the files necessary for using the features of the model. The file is run the same way as explained above.
+
+### Running Code Line-by-Line (recommended for new users)
+This section will detail running a NEURON simulation to record the voltage values from the cell compartments.
+
+In order to use the Neuron module, we will need to import a HocObject `h`. Including `gui` will open NEURON's interface (gui) to allow for viewing the simulation.
+
+```python
+from neuron import h, gui #gui is optional 
+```
+
+The `h` module allows python to interface with hoc. Code will be passed to `h` in the form of strings as shown in the next instruction. See [using the h variable](https://www.neuron.yale.edu/neuron/static/py_doc/programming/python.html#python-accessing-hoc) for more information.
+
+After importing the HocObject, use the following lines of code to import the needed files for the simulation:
+
+```python
+h('load_file("inc-first.ses")')  #load ion channels
+h('{load_file("neuron-CB-ext-axon-2pieces-chans-ext-axon-70um.ses")}')  #load cellbuilder
+h('load_file("fitfuncs.hoc")')  #load common functions
+h('load_file("stats.hoc")') #loads statistical functions
+```
+
+The simulation has to run for a certain duration. This tutorial will use 600 milliseconds. Duration can be set in the `h` variables through `tstop`:
+
+```python
+h.tstop = 600
+```
+
+Voltage values will be recorded in a hoc vector. To declare a vector and specify what it will record during the simulation, use:
+
+
+```python
+h('objref vec') #declares an object variable to hold the data
+h('vec = new Vector()') #initializes the vector
+h('vec.record(&soma[0].v(.5))') #sets the vector for receiving simulation data
+```
+
+Use the following to set the graph in NEURON to display the simulation data. A new window in NEURON should appear once the graph has been initialized. Note how the axes change when set the presets.
+
+```python
+h('objref g') #declares an object variable to hold the graph
+h('g = new Graph()') #initializes the graph
+h('g.size(0,10,-1,1)') #sets presets for axes of the graph
+```
+
+Now that everything is set up properly, run the simulation with:
+
+```python
+h.finitialize()  #Must be called before run().
+h.run()  #Runs simulation.
+h('vec.plot(g, .1)') #plots the data on the graph
+```
+
+Once the simulation ends, the data can be saved for later in a `.dat` file. Future tutorials will use MATLAB or tools from Anaconda for viewing the data. The following lines will save the recorded data in a binary file called `voltage_recording.dat`. Hit the Enter key twice for the last line to execute it.
+
+```python
+h('strdef my_file') #declares a string variable to hold the file name
+h('my_file = "voltage_recording.dat"') #specifies the file name in the string variable
+h('objref save') #creates a file object to hold the data
+h('save = new File(my_file)') 
+h.save.wopen() #opens the file to be written to
+n = h.vec.vwrite(h.save) #writes the binary data to the file and returns if successful
+if n == 1:
+    h.save.close()
+```
+
+## Viewing Voltage Values in Matlab with Pandora ToolBox
  
- If installed properly, the last line should not create any errors.
- ## Tutorials
+ First, you will need the [Pandora ToolBox](https://github.com/cengique/pandora-matlab)
+ 
+Copy the `voltage_recording.dat` to the current MATLAB directory. Next, to load the `voltage_recording.dat` file in MATLAB, type in the following command in the MATLAB prompt:
 
- [Recording Cell Compartment Voltage Values](../tutorial-python-neuron/RecordingCellCompartmentVoltageValues.md)
+`a_trace = trace('voltage_recording.dat', 25e-6, 1e-3,'my_trace',struct('file_type','neuron')); plot(a_trace)`
+ 
+
+![Voltage Plot](voltage_trace_plot.png)
+
+
