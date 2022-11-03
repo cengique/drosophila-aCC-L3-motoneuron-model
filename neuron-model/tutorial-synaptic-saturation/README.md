@@ -1,10 +1,13 @@
-# How to setup Python with the NEURON Module
+# Saturating synapses with stimulus
+
+This tutorial demonstrates that simulus resulting in Spontaneous
+Rhymthmic Currents (SRCs) can saturate. Synaptic stimuli can be
+adjusted to increase SRC amplitude, until local synapses saturate and
+limit the SRC amplitude.
 
 You should have [NEURON](https://www.neuron.yale.edu/neuron/download)
 and [Python](https://www.python.org/downloads/) installed before
-proceeding. See [prereqs](../README.md).
-
-Also see [tutorial on running Python with Neuron](../tutorial-python-neuron/README.md) 
+proceeding. See [prereqs](../README.md). Also see [tutorial on running Python with Neuron](../tutorial-python-neuron/README.md) 
 for detailed instructions.
 
 ## Running the simulation experiment file
