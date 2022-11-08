@@ -187,7 +187,8 @@ steady_state = new SaveState()
 proc saveState() { 
   steady_state.save()
   state_fobj = new File(state_file_name)
-  steady_state.fwrite(state_fobj) }
+  steady_state.fwrite(state_fobj)
+  print "Saved state to file." }
 
 proc restoreState() { 
   restoreStateFromFile(state_file_name)
@@ -198,6 +199,7 @@ proc restoreStateFromFile() {
   // check if state file exists by opening it for reading
   if (state_fobj.ropen() != 0) {
     state_fobj.close() // close file opened for existence test
+    print "Reading state from file."
     steady_state.fread(state_fobj)
     steady_state.restore() 
   } else { print "Warning: state file does not exist." }
