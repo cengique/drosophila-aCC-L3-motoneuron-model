@@ -53,9 +53,11 @@ def extract_mini_metrics(h, vc_current, start_time_ms):
     ampi = np.argmin(vc_current)
     risetime_ms = ampi*h.dt - start_time_ms
     amp_nA = vc_current[ampi] - vc_current[0]
-    falltime_i = np.where(vc_current[ampi:] > (vc_current[round(start_time_ms/h.dt)] - 0.000001))    
-    print(np.ndim(falltime_i))
-    falltime_ms = falltime_i[0][0]*h.dt
+    falltime_i = np.where(vc_current[ampi:] > (vc_current[round(start_time_ms/h.dt)] - 0.000001))
+    if np.shape(falltime_i)[1]> 0:
+        falltime_ms = falltime_i[0][0]*h.dt
+    else:
+        falltime_ms = np.shape(vc_current)[0]*h.dt - start_time_ms - risetime_ms
     return {"risetime_ms": risetime_ms, "falltime_ms": falltime_ms, "amp_nA": amp_nA}
 
 def run_amp_sweep(h, ps, vc_current, syn, min_amp, max_amp, steps):
@@ -82,3 +84,4 @@ def plot_amp_sweep(t, vc_currents):
     f.x_range = DataRange1d(start = 9, end = 50)
     f.y_range = DataRange1d(start = -70, end = 0)
     plt.show(f)
+
