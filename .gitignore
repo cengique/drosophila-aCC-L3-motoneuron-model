@@ -2,3 +2,5 @@
 NeuroML2/**/*.dat
 NeuroML2/**/*.ode
 NeuroML2/**/LEMS_Test*
+.ipynb_checkpoints
+__pycache__

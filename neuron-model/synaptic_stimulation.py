@@ -5,8 +5,9 @@ from bokeh.io import output_notebook
 import bokeh.plotting as plt
 from bokeh.models.ranges import DataRange1d
 from bokeh.models.tools import CrosshairTool, ExamineTool
-import numpy as np
 from bokeh.io import export_svg
+import numpy as np
+import pandas as pd
 
 # Dictionary for netcon objects indexed by section number that hold the synapse and netstim objects
 syns = {}
@@ -52,13 +53,15 @@ def create_syns(h, *secs):
 def extract_mini_metrics(h, vc_current, start_time_ms):
     ampi = np.argmin(vc_current)
     risetime_ms = ampi*h.dt - start_time_ms
-    amp_nA = vc_current[ampi] - vc_current[0]
-    falltime_i = np.where(vc_current[ampi:] > (vc_current[round(start_time_ms/h.dt)] - 0.000001))
+    baseline_nA = vc_current[round(start_time_ms/h.dt)]
+    #print(f"baseline_nA: {baseline_nA}, argmin: {ampi}, min: {vc_current[ampi]}")
+    amp_nA = vc_current[ampi] - baseline_nA
+    falltime_i = np.where(vc_current[ampi:] > (baseline_nA - 0.00001))
     if np.shape(falltime_i)[1]> 0:
         falltime_ms = falltime_i[0][0]*h.dt
     else:
         falltime_ms = np.shape(vc_current)[0]*h.dt - start_time_ms - risetime_ms
-    return {"risetime_ms": risetime_ms, "falltime_ms": falltime_ms, "amp_nA": amp_nA}
+    return {"risetime_ms": risetime_ms, "falltime_ms": falltime_ms, "amp_pA": amp_nA*1e3}
 
 def run_amp_sweep(h, ps, vc_current, syn, min_amp, max_amp, steps):
     step_num = 0    
@@ -84,4 +87,24 @@ def plot_amp_sweep(t, vc_currents):
     f.x_range = DataRange1d(start = 9, end = 50)
     f.y_range = DataRange1d(start = -70, end = 0)
     plt.show(f)
+
+def get_sweep_metrics(h, vc_currents):
+    num_steps = np.shape(vc_currents)[1]
+    for step in np.arange(num_steps):
+        metrics = extract_mini_metrics(h, vc_currents[:,step], 10)
+        if not step:
+            metrics_df = pd.DataFrame(data=np.empty((num_steps, len(metrics))), columns=metrics.keys())
+            metrics_df.iloc[step, :] = pd.Series(metrics)
+        else:
+            metrics_df.iloc[step, :] = pd.Series(metrics)
+    return metrics_df
+
+def plot_scatter_risetime_amp(minis_df):
+    f = plt.figure(x_axis_label="rise time (ms)", y_axis_label="amplitude (pA)", frame_width = 400)
+    f.add_tools(CrosshairTool())
+    f.scatter(x='risetime_ms', y='amp_pA',  source=minis_df, alpha=0.3)
+    #f.x_range = DataRange1d(start = 0.8, end = 1.1)
+    #f.y_range = DataRange1d(start = -70, end = 0)
+    plt.show(f)
+
 
