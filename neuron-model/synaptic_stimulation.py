@@ -21,13 +21,14 @@ class Synapse():
         self.ns = ns
         self.nc = nc
         
-    def set_stim(self, ps, weight = .00018, tau = 5, interval = 10, magepsc = 20, syne = 0, number = 1, start = 10):
+    def set_stim(self, ps, weight = .00018, taurise = 1, taufall = 5, interval = 10, magepsc = 20, syne = 0, number = 1, start = 10):
         """Set parameters of specified synapse"""
         nc = self.nc
         syn = self.syn
         ns = self.ns
-        print(f"Setting: weight={weight}, tau={tau}, interval={interval}, magepsc={magepsc}, syne={syne}, number={number}, start={start}")
-        syn.tau = tau
+        print(f"Setting: weight={weight}, taurise = {taurise}, taufall={taufall}, interval={interval}, magepsc={magepsc}, syne={syne}, number={number}, start={start}")
+        syn.tau1 = taurise
+        syn.tau2 = taufall
         syn.e = syne
         ns.interval = interval
         ns.number = number
@@ -43,7 +44,7 @@ def create_syns(h, *secs):
     """Factory method to create synapse, NetStim, and NetCon objects"""
     for sec in secs:
         print(f"Creating synapse on {sec}")
-        syn = h.ExpSyn(sec(0.5))
+        syn = h.Exp2Syn(sec(0.5))
         ns = h.NetStim(sec(0.5))
         nc = h.NetCon(ns, syn)
         nc.delay = 0
@@ -68,7 +69,7 @@ def run_amp_sweep(h, ps, vc_current, syn, min_amp, max_amp, steps):
     for amp in np.logspace(np.log10(min_amp), np.log10(max_amp), steps):
         print(f"Simulating step of synaptic weight of {amp}.")
         h.restoreState()
-        syn.set_stim(ps = ps, weight = amp, tau=5, interval = 0, number = 1, magepsc = 1)
+        syn.set_stim(ps = ps, weight=amp, taurise=4, taufall=5, interval=0, number=1, magepsc=1)
         h.finitialize()
         h.continuerun(60 * ms)
         if not step_num:
