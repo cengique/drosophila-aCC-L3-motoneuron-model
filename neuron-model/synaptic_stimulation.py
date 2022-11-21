@@ -65,11 +65,12 @@ def extract_mini_metrics(h, vc_current, start_time_ms):
     return {"risetime_ms": risetime_ms, "falltime_ms": falltime_ms, "amp_pA": amp_nA*1e3}
 
 def run_amp_sweep(h, ps, vc_current, syn, min_amp, max_amp, steps):
-    step_num = 0    
-    for amp in np.logspace(np.log10(min_amp), np.log10(max_amp), steps):
+    step_num = 0
+    steps_list = np.logspace(np.log10(min_amp), np.log10(max_amp), steps)
+    for amp in steps_list:
         print(f"Simulating step of synaptic weight of {amp}.")
         h.restoreState()
-        syn.set_stim(ps = ps, weight=amp, taurise=4, taufall=5, interval=0, number=1, magepsc=1)
+        syn.set_stim(ps = ps, weight=amp, taurise=1, taufall=5, interval=0, number=1, magepsc=1)
         h.finitialize()
         h.continuerun(60 * ms)
         if not step_num:
@@ -78,7 +79,7 @@ def run_amp_sweep(h, ps, vc_current, syn, min_amp, max_amp, steps):
         else:
             vc_currents[:, step_num] = np.array(vc_current)
         step_num += 1
-    return vc_currents
+    return vc_currents, steps_list
 
 def plot_amp_sweep(t, vc_currents):
     f = plt.figure(x_axis_label="t (ms)", y_axis_label="VC current (pA)", frame_width = 800)
@@ -88,13 +89,14 @@ def plot_amp_sweep(t, vc_currents):
     f.x_range = DataRange1d(start = 9, end = 50)
     f.y_range = DataRange1d(start = -70, end = 0)
     plt.show(f)
+    return f
 
-def get_sweep_metrics(h, vc_currents):
+def get_sweep_metrics(h, vc_currents, steps_list):
     num_steps = np.shape(vc_currents)[1]
     for step in np.arange(num_steps):
         metrics = extract_mini_metrics(h, vc_currents[:,step], 10)
         if not step:
-            metrics_df = pd.DataFrame(data=np.empty((num_steps, len(metrics))), columns=metrics.keys())
+            metrics_df = pd.DataFrame(data=np.empty((num_steps, len(metrics))), columns=metrics.keys(), index=steps_list)
             metrics_df.iloc[step, :] = pd.Series(metrics)
         else:
             metrics_df.iloc[step, :] = pd.Series(metrics)
@@ -107,5 +109,6 @@ def plot_scatter_risetime_amp(minis_df):
     #f.x_range = DataRange1d(start = 0.8, end = 1.1)
     #f.y_range = DataRange1d(start = -70, end = 0)
     plt.show(f)
+    return f
 
 
