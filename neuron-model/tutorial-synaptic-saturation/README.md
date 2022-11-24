@@ -1,9 +1,10 @@
 # Saturating synapses with stimulus
 
 This tutorial demonstrates that simulus resulting in Spontaneous
-Rhymthmic Currents (SRCs) can saturate. Synaptic stimuli can be
-adjusted to increase SRC amplitude, until local synapses saturate and
-limit the SRC amplitude.
+Rhymthmic Currents (SRCs) can cause voltage saturation locally at
+synaptic input sites. Synaptic stimuli can be adjusted to increase SRC
+amplitude, until voltage at synapses saturate at the synaptic
+coductance reversal potential, which limits the SRC amplitude.
 
 You should have [NEURON](https://www.neuron.yale.edu/neuron/download)
 and [Python](https://www.python.org/downloads/) installed before
@@ -12,7 +13,7 @@ for detailed instructions.
 
 ## Running the simulation experiment file
 
-Main experiment file for this tutorial is
+Main experiment file for this tutorial is the Python script 
 `exp-axon-tail2-chans-ext-axon-70um-10x-mimic-sustained-random.py`. You
 can run this in IDLE or `ipython -i` to get an interactive prompt
 after it loads. Note that this is not headless simulation and it will
@@ -77,20 +78,26 @@ After the ipython loading information, the morphology statistics are
 displayed, followed by the locations of the 10 synapses. The default
 parameters of synaptic stimulation are listed in the final line.
 
-![](voltage-locations.png)
-
 It should also pop up two graphs that you can set "view = plot" from
 the right-click menu to see the complete responses. The graph titled
-"VClamp[0].i" displays the voltage clamp current. The graph with
-labels of electrode, soma, etc, is showing voltage responses
-throughout locations in the cell. Notice that voltage clamp is limited
-to the electrode compartment, and even the soma has escaped the clamp
-slightly.
+"VClamp[0].i" displays the voltage clamp current. We will be mainly
+using this graph to show the saturation effect.
+
+The other graph (below) that has labels for electrode, soma, etc,
+shows voltage responses throughout different locations in the
+cell. X-axis is time in ms and y-axis voltage in mV. Notice that
+voltage clamp of -60 mV is only limited to the black-colored electrode
+compartment, and even the soma has escaped the clamp
+slightly. Supporting the main argument of this tutorial, blue-colored
+dendritic voltage traces escape a large amount and rise up close to
+the cholinergic synapses' reversal potential of 0 mV.
+
+![](voltage-locations.png)
 
 ## Changing parameters
 
-If you have an interactive prompt after loading the file, you can
-rerun the parameter script to change the defaults:
+At the interactive prompt after loading the file (see above on how to
+get this), you can rerun the parameter script to change the defaults:
 
 ```python
 In [1]: set_syn_pars(weight=0.09)
@@ -99,18 +106,61 @@ Setting: weight=0.09, tau=5, interval=10, magepsc=20, syne=0
 
 After this, one needs to re-initialize and run the simulation for
 about 600 ms. You can open the Tools->Runcontrol to do this, or re-run
-the last two lines of the experiment script.
+the last two lines of the experiment script:
+
+```python
+h.finitialize(-65 * mV)
+h.continuerun(600 * ms)
+```
 
 ## Spontaneous Rhythmic Current (SRC) amplitude saturation
 
 This simulation aims to mimic the SRC shape by applying a high rate of
-firing at the 10 selected synaptic locations. Because the synaptic
-reversal is at 0 mV, too much stimulation causes the voltage escaping
-from clamp at locations distal to the soma reach the reversal voltage. Once it reaches the reversal voltage, it cannot increase further and thus the amplitude of the total SRC no longer increases with further increasing input magnitude. 
+firing at the 10 pre-selected synaptic locations. Because the
+cholinergic synapses' reversal potential is 0 mV, too much stimulation
+causes the voltage escaping from clamp at locations distal to the soma
+reach the reversal potential. Once voltage reaches reversal, it
+cannot increase further and thus the amplitude of the total SRC no
+longer increases with further increasing synaptic input magnitude.
 
-The following graph shows that only by increasing Esyn (red traces), one can further increase SRC amplitude.
+The following graph shows that, only by increasing the synaptic
+reversal (Esyn) (red traces), one can further increase SRC amplitude.
 
 ![](saturation_plot.png)
 
+## Does manipulating the reversal potential changed saturation in increased-stimulus conditions?
 
+To experimentally test the model prediction that saturation is the
+reason for lack of observed increases in SRC amplitude, one can
+attempt to manipulate reversal potentials in the living cell. To test
+whether this manipulation can expose the saturation mechanism, we
+changed the synaptic reversal to -20 mV and reran the simulation with
+increasing synaptic weights as before using the following code
+snippet:
+
+```python
+import numpy as np
+
+w_min = 0.0001
+w_max = 0.1
+num_steps = 4
+
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+    set_syn_pars(weight=w, syne=-20)
+    h.finitialize(-65 * mV)
+    h.continuerun(800 * ms)
+```
+
+As a result, we obtained smaller SRCs, at about half of the original size:
+
+![](saturation_plot_Esyn_-20.png)
+
+However, these SRCs also saturate at this amplitude. Therefore, in an
+elevated excitability setting, we would expect them to remain the same
+size. Therefore, lowering the driving force by reducing the reversal
+potential may not be the best strategy for testing the model
+prediction experimentally.
+
+Notice that the duration of the SRCs increase as saturation is
+reached - similar to experimental observations in SRC duration.
 
