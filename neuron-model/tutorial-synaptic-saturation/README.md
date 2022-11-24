@@ -128,15 +128,15 @@ reversal (Esyn) (red traces), one can further increase SRC amplitude.
 
 ![](saturation_plot.png)
 
-## Does manipulating the reversal potential changed saturation in increased-stimulus conditions?
+## Can reversal potential manipulation expose saturation in increased-stimulus conditions?
 
 To experimentally test the model prediction that saturation is the
 reason for lack of observed increases in SRC amplitude, one can
 attempt to manipulate reversal potentials in the living cell. To test
 whether this manipulation can expose the saturation mechanism, we
-changed the synaptic reversal to -20 mV and reran the simulation with
-increasing synaptic weights as before using the following code
-snippet:
+changed the synaptic reversal to -20 mV and reran the simulation by
+increasing synaptic weights logarithmically as before using the
+following code snippet:
 
 ```python
 import numpy as np
@@ -164,3 +164,18 @@ prediction experimentally.
 Notice that the duration of the SRCs increase as saturation is
 reached - similar to experimental observations in SRC duration.
 
+## Exposing saturation by partial block of synaptic conductance
+
+If the synaptic weight is reduced by half, but reversal is kept at its
+original value of 0 mV, we get:
+
+![](saturation_plot_compare_half_w.png)
+
+As seen in figure above, halving the synaptic weights did not significantly
+reduce the amplitude of the SRC - especially if the SRC is already at
+a saturation point. Since we don't observe SRC amplitude increases
+experimentally, that must be due to being already at saturation. To
+see any increase in SRC amplitude, one would need to reduce synaptic
+strength by at least an order of magnitude (i.e., divide by 10 or
+reduce to 10% of original) according to predictions from the model
+simulations.
