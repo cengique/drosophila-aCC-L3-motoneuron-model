@@ -52,12 +52,14 @@ def create_syns(h, *secs):
         syns[str(sec)] = syn_obj
 
 def extract_mini_metrics(h, vc_current, start_time_ms):
-    ampi = np.argmin(vc_current)
-    risetime_ms = ampi*h.dt - start_time_ms
-    baseline_nA = vc_current[round(start_time_ms/h.dt)]
+    start_dt = round(start_time_ms/h.dt)
+    ampi = np.argmin(vc_current[start_dt:])
+    risetime_ms = ampi*h.dt
+    baseline_nA = vc_current[start_dt]
     #print(f"baseline_nA: {baseline_nA}, argmin: {ampi}, min: {vc_current[ampi]}")
-    amp_nA = vc_current[ampi] - baseline_nA
-    falltime_i = np.where(vc_current[ampi:] > (baseline_nA - 0.00001))
+    max_i = start_dt + ampi
+    amp_nA = vc_current[max_i] - baseline_nA
+    falltime_i = np.where(vc_current[max_i:] > (baseline_nA - 0.00001))
     if np.shape(falltime_i)[1]> 0:
         falltime_ms = falltime_i[0][0]*h.dt
     else:
@@ -81,6 +83,21 @@ def run_amp_sweep(h, ps, vc_current, syn, min_amp, max_amp, steps):
         step_num += 1
     return vc_currents, steps_list
 
+def run_sweep_func(h, ps, vc_current, func, steps_list):
+    step_num = 0
+    for amp in steps_list:
+        h.restoreState()
+        func(amp)
+        h.finitialize()
+        h.continuerun(60 * ms)
+        if not step_num:
+            vc_currents = np.empty((vc_current.size(), len(steps_list)))
+            vc_currents[:,0] = np.array(vc_current)
+        else:
+            vc_currents[:, step_num] = np.array(vc_current)
+        step_num += 1
+    return vc_currents
+
 def plot_amp_sweep(t, vc_currents):
     f = plt.figure(x_axis_label="t (ms)", y_axis_label="VC current (pA)", frame_width = 800)
     f.add_tools(CrosshairTool())
@@ -88,7 +105,6 @@ def plot_amp_sweep(t, vc_currents):
         f.line(np.array(t), vc_currents[:,step] * 1e3, line_width=2)
     f.x_range = DataRange1d(start = 9, end = 50)
     f.y_range = DataRange1d(start = -70, end = 0)
-    plt.show(f)
     return f
 
 def get_sweep_metrics(h, vc_currents, steps_list):
@@ -112,3 +128,11 @@ def plot_scatter_risetime_amp(minis_df):
     return f
 
 
+def set_g_pas_dend(h, new_g_pas):
+    sl = h.SectionList()
+    sl.wholetree(h.soma[0])     # Add everything
+    # Except electrode and extended axon section with Na-K channels
+    sl.remove(h.electrode)
+    sl.remove(h.axon_ext[1])
+    for sec in sl:
+        sec.g_pas = new_g_pas
