@@ -98,11 +98,11 @@ def run_sweep_func(h, ps, vc_current, func, steps_list):
         step_num += 1
     return vc_currents
 
-def plot_amp_sweep(t, vc_currents):
+def plot_amp_sweep(t, vc_currents, label_str):
     f = plt.figure(x_axis_label="t (ms)", y_axis_label="VC current (pA)", frame_width = 800)
     f.add_tools(CrosshairTool())
     for step in np.arange(np.shape(vc_currents)[1]):
-        f.line(np.array(t), vc_currents[:,step] * 1e3, line_width=2)
+        f.line(np.array(t), vc_currents[:,step] * 1e3, line_width=2, legend_label=label_str)
     f.x_range = DataRange1d(start = 9, end = 50)
     f.y_range = DataRange1d(start = -70, end = 0)
     return f
@@ -121,10 +121,8 @@ def get_sweep_metrics(h, vc_currents, steps_list):
 def plot_scatter_risetime_amp(minis_df):
     f = plt.figure(x_axis_label="rise time (ms)", y_axis_label="amplitude (pA)", frame_width = 400)
     f.add_tools(CrosshairTool())
-    f.scatter(x='risetime_ms', y='amp_pA',  source=minis_df, alpha=0.3)
-    #f.x_range = DataRange1d(start = 0.8, end = 1.1)
-    #f.y_range = DataRange1d(start = -70, end = 0)
-    plt.show(f)
+    f.line(x='risetime_ms', y='amp_pA',  source=minis_df, alpha=1)
+    f.circle(x='risetime_ms', y='amp_pA',  source=minis_df, alpha=1)
     return f
 
 
