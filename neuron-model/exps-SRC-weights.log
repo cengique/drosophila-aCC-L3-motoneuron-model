@@ -1,0 +1,381 @@
+[cengiz@manjaro tutorial-synaptic-saturation]$ ls
+README.html~  README.md~           saturation_plot.pdf  saturation_plot.svg
+README.md     saturation_plot.eps  saturation_plot.png  voltage-locations.png
+[cengiz@manjaro tutorial-synaptic-saturation]$ xclock
+bash: xclock: command not found
+[cengiz@manjaro tutorial-synaptic-saturation]$ 
+[cengiz@manjaro tutorial-synaptic-saturation]$ kate
+Icon theme "Numix-Circle" not found.
+[cengiz@manjaro tutorial-synaptic-saturation]$ ls
+README.html~  README.md~           saturation_plot.pdf  saturation_plot.svg
+README.md     saturation_plot.eps  saturation_plot.png  voltage-locations.png
+[cengiz@manjaro tutorial-synaptic-saturation]$ cd ..
+[cengiz@manjaro neuron-model]$ ipython exp-axon-tail2-chans-ext-axon-70um-10x-mimic-sustained-random.py 
+NEURON: unable to open font "*helvetica-medium-r-normal*--14*", using "fixed"
+	0 
+	0 
+	0 
+	0 
+	0 
+	1 
+	1 
+	1 
+Secname	L (um)	Diam (um)	Area [um^2]	Ri [MO]		Cm [pF]	g_pas [nS]
+axon:	37.61	1.14	134.11	35.12	1.34	0.00
+soma:	6.98	5.50	120.56	0.28	1.21	0.00
+bottom dend:	996.91	0.78	2430.62	1991.49	24.31	0.02
+botdend - axon:	959.10	0.76	2292.50	1993.51	22.92	0.02
+topdend:	366.00	0.73	837.85	829.37	8.38	0.01
+ext. axon:	570.00	0.71	1275.49	1351.81	12.75	1.53
+	1 
+	1 
+	1 
+Warning: state file does not exist.
+dendrite[685]
+
+dendrite[524]
+
+dendrite[520]
+
+dendrite[626]
+
+dendrite[205]
+
+dendrite[357]
+
+dendrite[464]
+
+dendrite[588]
+
+dendrite[513]
+
+dendrite[48]
+
+Setting: weight=0.00018, tau=5, interval=10, magepsc=20, syne=0
+[cengiz@manjaro neuron-model]$ ipython -i exp-axon-tail2-chans-ext-axon-70um-10x-mimic-sustained-random.py 
+Python 3.9.7 (default, Oct 10 2021, 15:13:22) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.29.0 -- An enhanced Interactive Python. Type '?' for help.
+NEURON: unable to open font "*helvetica-medium-r-normal*--14*", using "fixed"
+	0 
+	0 
+	0 
+	0 
+	0 
+	1 
+	1 
+	1 
+Secname	L (um)	Diam (um)	Area [um^2]	Ri [MO]		Cm [pF]	g_pas [nS]
+axon:	37.61	1.14	134.11	35.12	1.34	0.00
+soma:	6.98	5.50	120.56	0.28	1.21	0.00
+bottom dend:	996.91	0.78	2430.62	1991.49	24.31	0.02
+botdend - axon:	959.10	0.76	2292.50	1993.51	22.92	0.02
+topdend:	366.00	0.73	837.85	829.37	8.38	0.01
+ext. axon:	570.00	0.71	1275.49	1351.81	12.75	1.53
+	1 
+	1 
+	1 
+Warning: state file does not exist.
+dendrite[685]
+
+dendrite[524]
+
+dendrite[520]
+
+dendrite[626]
+
+dendrite[205]
+
+dendrite[357]
+
+dendrite[464]
+
+dendrite[588]
+
+dendrite[513]
+
+dendrite[48]
+
+Setting: weight=0.00018, tau=5, interval=10, magepsc=20, syne=0
+
+In [1]: import numpy as np
+
+import numpy as npp
+
+In [2]: 
+
+In [2]: w_min = 0.0001
+w_max = 0.1
+num_steps = 4
+
+w_min = 0.00011
+
+In [3]: w_max = 0.11
+
+In [4]: num_steps = 44
+
+In [5]: 
+
+In [5]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+    set_syn_pars(weight=w, syne=-20)
+    h.finitialize(-65 * mV)
+    h.continuerun(600 * ms)
+
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps)::     set_syn_pars(weight=w, syne=-20))     h.finitialize(-65 * mV))
+  File "<ipython-input-5-82d3771acbd9>", line 3
+    h.finitialize(-65 * mV)
+    ^
+IndentationError: unexpected indent
+
+
+In [6]:     h.continuerun(600 * ms))
+Out[6]: 0.0
+
+In [7]: 
+
+In [7]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=-20)
+set_syn_pars(weight=w, syne=-20)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(600 * ms)
+h.continuerun(600 * ms)) 
+ 
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=-20
+
+In [8]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=-20)
+set_syn_pars(weight=w, syne=-20)) h.finitialize(-65 * mV)
+
+h.finitialize(-65 * mV))  
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=-20
+
+In [9]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=-20)
+set_syn_pars(weight=w, syne=-20)) h.finitialize(-65 * mV)
+
+h.finitialize(-65 * mV))  
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=-20
+
+In [10]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=-20)
+set_syn_pars(weight=w, syne=-20)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=-20
+
+In [11]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=-20)
+set_syn_pars(weight=w, syne=-20)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=-20
+
+In [12]: Warning: state file does not exist.
+
+
+
+In [12]: command dirs
+command dirss
+  File "<ipython-input-12-5a0a2522309d>", line 1
+    command dirs
+            ^
+SyntaxError: invalid syntax
+
+
+In [13]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=-20)
+set_syn_pars(weight=w, syne=-20)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=-20
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=-20
+
+In [14]: Warning: state file does not exist.
+
+
+
+In [14]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w/2, syne=0)
+set_syn_pars(weight=w/2, syne=0)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=5e-05, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.0005, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.005, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.05, tau=5, interval=10, magepsc=20, syne=0
+
+In [15]: Warning: state file does not exist.
+Warning: state file does not exist.
+Warning: state file does not exist.
+
+
+
+In [15]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w/2, syne=0)
+set_syn_pars(weight=w/2, syne=0)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=5e-05, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.0005, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.005, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.05, tau=5, interval=10, magepsc=20, syne=0
+
+In [16]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=0)
+set_syn_pars(weight=w, syne=0)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=0
+
+In [17]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w/2, syne=0)
+set_syn_pars(weight=w/2, syne=0)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=5e-05, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.0005, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.005, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.05, tau=5, interval=10, magepsc=20, syne=0
+
+In [18]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=0)
+set_syn_pars(weight=w, syne=0)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=0
+Segmentation fault (core dumped)
+[cengiz@manjaro neuron-model]$ ipython -i exp-axon-tail2-chans-ext-axon-70um-10x-mimic-sustained-random.py 
+Python 3.9.7 (default, Oct 10 2021, 15:13:22) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.29.0 -- An enhanced Interactive Python. Type '?' for help.
+NEURON: unable to open font "*helvetica-medium-r-normal*--14*", using "fixed"
+	0 
+	0 
+	0 
+	0 
+	0 
+	1 
+	1 
+	1 
+Secname	L (um)	Diam (um)	Area [um^2]	Ri [MO]		Cm [pF]	g_pas [nS]
+axon:	37.61	1.14	134.11	35.12	1.34	0.00
+soma:	6.98	5.50	120.56	0.28	1.21	0.00
+bottom dend:	996.91	0.78	2430.62	1991.49	24.31	0.02
+botdend - axon:	959.10	0.76	2292.50	1993.51	22.92	0.02
+topdend:	366.00	0.73	837.85	829.37	8.38	0.01
+ext. axon:	570.00	0.71	1275.49	1351.81	12.75	1.53
+	1 
+	1 
+	1 
+Warning: state file does not exist.
+dendrite[685]
+
+dendrite[524]
+
+dendrite[520]
+
+dendrite[626]
+
+dendrite[205]
+
+dendrite[357]
+
+dendrite[464]
+
+dendrite[588]
+
+dendrite[513]
+
+dendrite[48]
+
+Setting: weight=0.00018, tau=5, interval=10, magepsc=20, syne=0
+
+In [1]: import numpy as np
+
+w_min = 0.0001
+w_max = 0.1
+num_steps = 4
+import numpy as npp
+
+In [2]: 
+
+In [2]: w_min = 0.00011
+
+In [3]: w_max = 0.11
+
+In [4]: num_steps = 44
+
+In [5]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=0)
+set_syn_pars(weight=w, syne=0)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=0
+
+In [6]: Warning: state file does not exist.
+
+
+
+In [6]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w, syne=0)
+set_syn_pars(weight=w, syne=0)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=0.0001, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.001, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.01, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.1, tau=5, interval=10, magepsc=20, syne=0
+
+In [7]: Warning: state file does not exist.
+
+
+
+In [7]: for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):
+for w in np.logspace(np.log10(w_min), np.log10(w_max), num_steps):: set_syn_pars(weight=w/2, syne=0)
+set_syn_pars(weight=w/2, syne=0)) h.finitialize(-65 * mV)
+h.finitialize(-65 * mV)) h.continuerun(800 * ms)
+h.continuerun(800 * ms)) 
+ 
+Setting: weight=5e-05, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.0005, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.005, tau=5, interval=10, magepsc=20, syne=0
+Setting: weight=0.05, tau=5, interval=10, magepsc=20, syne=0
+
+In [8]: 
+Do you really want to exit ([y]/n)? y
+[cengiz@manjaro neuron-model]$ exit
+exit
+
+Process shell finished
